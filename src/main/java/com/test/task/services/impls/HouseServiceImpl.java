@@ -37,8 +37,8 @@ public class HouseServiceImpl implements HouseService {
         return ResponseEntity.ok().body(house);
     }
 
-    public Iterable<House> getHousesByDistrict(District district) {
-        return houseRepo.findAllByDistrict(district);
+    public Iterable<House> getHousesByDistrict(String district) {
+        return houseRepo.findByDistrict(district);
     }
 
     public Iterable<House> getHousesByStreet(String street) {

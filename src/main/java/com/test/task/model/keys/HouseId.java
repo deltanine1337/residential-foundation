@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 public class HouseId implements Serializable {
     private String street;
-    private int houseNumber;
+    private Integer houseNumber;
 
-    public HouseId(String street, int houseNumber){
+    public HouseId(){}
+
+    public HouseId(String street, Integer houseNumber){
         this.street = street;
         this.houseNumber = houseNumber;
     }
 
-    public int getHouseNumber() {
+    public Integer getHouseNumber() {
         return houseNumber;
     }
 
@@ -19,7 +21,7 @@ public class HouseId implements Serializable {
         return street;
     }
 
-    public void setHouseNumber(int houseNumber) {
+    public void setHouseNumber(Integer houseNumber) {
         this.houseNumber = houseNumber;
     }
 

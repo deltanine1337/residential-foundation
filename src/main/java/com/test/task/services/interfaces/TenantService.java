@@ -11,8 +11,8 @@ public interface TenantService {
     void deleteTenant(Long id);
     ResponseEntity<Tenant> updateTenant(Long id, Tenant tenant);
     Iterable<Tenant> getTenantsByStreet(String street);
-    Iterable<Tenant> getTenantsByDistrict(District district);
-    Iterable<Tenant> getTenantsByHouse(House house);
+    Iterable<Tenant> getTenantsByDistrict(String districtName);
+    Iterable<Tenant> getTenantsByHouse(String street, int houseNumber);
     Iterable<Tenant> getTenantsByTelNum(String telNum);
     Iterable<Tenant> getTenantsByFio(String fio);
 }

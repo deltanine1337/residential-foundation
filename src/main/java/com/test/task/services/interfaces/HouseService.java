@@ -11,5 +11,5 @@ public interface HouseService {
     void deleteHouse(HouseId houseId);
     ResponseEntity<House> updateHouse(HouseId houseId, House house);
     Iterable<House> getHousesByStreet(String street);
-    Iterable<House> getHousesByDistrict(District district);
+    Iterable<House> getHousesByDistrict(String district);
 }

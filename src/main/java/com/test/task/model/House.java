@@ -5,12 +5,13 @@ import com.test.task.model.keys.HouseId;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table
 @Data
-public class House {
+public class House implements Serializable {
     @EmbeddedId
     private HouseId houseId;
     @Column(nullable = false)
@@ -20,7 +21,7 @@ public class House {
     @Column(nullable = false)
     private int numberOfEntraces;
     @ManyToOne
-    @JoinColumn(name = "districtId")
+    @JoinColumn(name = "district_id")
     private District district;
     @JsonIgnore
     @OneToMany(mappedBy = "house", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

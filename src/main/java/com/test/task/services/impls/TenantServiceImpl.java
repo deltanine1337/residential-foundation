@@ -1,7 +1,5 @@
 package com.test.task.services.impls;
 
-import com.test.task.model.District;
-import com.test.task.model.House;
 import com.test.task.model.Tenant;
 import com.test.task.repos.TenantRepo;
 import com.test.task.services.interfaces.TenantService;
@@ -22,7 +20,8 @@ public class TenantServiceImpl implements TenantService {
     }
 
     public ResponseEntity<Tenant> addTenant(Tenant tenant) {
-        tenantRepo.save(tenant);
+        tenantRepo.save1(tenant.getApartmentNumber(), tenant.getFio(), tenant.getTelNum(),
+                tenant.getHouse().getHouseId().getHouseNumber(), tenant.getHouse().getHouseId().getStreet());
         return ResponseEntity.ok().body(tenant);
     }
 
@@ -37,12 +36,12 @@ public class TenantServiceImpl implements TenantService {
         return ResponseEntity.ok().body(tenant);
     }
 
-    public Iterable<Tenant> getTenantsByDistrict(District district) {
-        return tenantRepo.findAllByDistrict(district.getDistrictName());
+    public Iterable<Tenant> getTenantsByDistrict(String districtName) {
+        return tenantRepo.findAllByDistrict(districtName);
     }
 
-    public Iterable<Tenant> getTenantsByHouse(House house) {
-        return tenantRepo.findAllByHouse(house);
+    public Iterable<Tenant> getTenantsByHouse(String street, int houseNumber) {
+        return tenantRepo.findByHouse(street, houseNumber);
     }
 
     public Iterable<Tenant> getTenantsByStreet(String street) {
