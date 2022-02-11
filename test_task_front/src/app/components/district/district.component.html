@@ -1,0 +1,73 @@
+<h2 style="margin-top: 15px;" align="center">Районы</h2>
+<div style="width: 95%; margin: 0 auto">
+<div align="right" style="margin-right: 20px; margin-top: 2%" id="btnAddNew">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDistrictModal"
+          (click)="onCreate()">
+    ➕ Добавить
+  </button>
+</div>
+
+<div align="center" style="margin-top: 25px;">
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+    <tr>
+      <th scope="col" style="width: 20%">Название</th>
+      <th scope="col" style="width: 10%"></th>
+      <th scope="col" style="width: 10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let district of districts ">
+      <td id="col1">{{district?.districtName}}</td>
+      <td id="col2">
+        <button type="button" class="btn btn-danger" (click)="deleteDistrict(district?.districtId!)">
+          🗑 Удалить
+        </button>
+      </td>
+      <td id="col3">
+        <button type="button" class="btn btn-warning button-center" data-bs-toggle="modal" data-bs-target="#addDistrictModal"
+                (click)="onEdit(district)">
+          ✏ Изменить
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addDistrictModal" tabindex="-1" role="dialog" aria-labelledby="addDistrictModal"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{isUpdate ? 'Изменить' : 'Добавить'}} запись</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+
+      <div class="modal-body">
+        <form name="addForm">
+          <div class="form-group">
+            <label for="add-district-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="selectedDistrict.districtName" name="districtName" type="text" class="form-control"
+                   id="add-district-name" #districtName="ngModel" required />
+            <div [hidden]="districtName.valid || districtName.untouched" class="alert alert-danger">
+              Некорректное название района
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="isUpdate ? updateDistrict() : addDistrict()"
+                data-bs-dismiss="modal"
+                [disabled]="districtName.invalid" >Сохранить
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
