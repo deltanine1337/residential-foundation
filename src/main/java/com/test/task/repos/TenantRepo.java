@@ -18,7 +18,14 @@ public interface TenantRepo extends CrudRepository<Tenant, Long> {
     @Query(value = "insert into tenant(apartment_number,fio,tel_num,house_number,street) " +
             "values(:an,:fio,:telnum,:hn,:street)", nativeQuery = true)
     void save1(@Param("an") int an, @Param("fio") String fio, @Param("telnum") String telnum, @Param("hn") int hn,
-                @Param("street") String street);
+               @Param("street") String street);
+    @Modifying
+    @Transactional
+    @Query(value = "update tenant set apartment_number=:an,fio=:fio,tel_num=:telnum,house_number=:hn,street=:street where" +
+            " tenant_id=:id",
+            nativeQuery = true)
+    void update(@Param("an") int an, @Param("fio") String fio, @Param("telnum") String telnum, @Param("hn") int hn,
+               @Param("street") String street, @Param("id") Long id);
     Iterable<Tenant> findAllByFio(String fio);
     @Query(value = "select * from tenant where (house_number, street) in (select house_number, street from house where " +
             "district_id in (select district_id from district where district_name = :district))", nativeQuery = true)

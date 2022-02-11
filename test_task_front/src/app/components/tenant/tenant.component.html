@@ -1,0 +1,125 @@
+<h2 style="margin-top: 15px;" align="center">Жители</h2>
+
+<div style="width: 95%; margin: 0 auto">
+  <div class="form-group" style="width: 100%;">
+    <table style="margin-top: 2%; width: 100%">
+      <tr>
+        <td style="width: 3%">Поиск</td>
+        <td style="width: 10%">
+          <ng-select [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
+                     (change)="onChangeSelectCriteria($event)" required>
+          </ng-select>
+        </td>
+        <td style="width: 30%">
+          <input type="text" class="form-control" [(ngModel)]="searchText"/>
+        </td>
+
+        <td style="width: 5%">
+          <button class="btn btn-primary" (click)="findTenants(searchText)">Найти</button>
+        </td>
+        <td style="width: 5%">
+          <button class="btn btn-danger" (click)="loadTenants()">Сброс</button>
+        </td>
+        <td align="right">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTenantModal"
+                  (click)="onCreate()">
+            ➕ Добавить
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div align="center" style="margin-top: 25px;">
+    <table class="table table-bordered table-hover">
+      <thead class="table-light">
+      <tr>
+        <th scope="col" style="width: 20%">ФИО</th>
+        <th scope="col" style="width: 10%">Номер телефона</th>
+        <th scope="col" style="width: 10%">Номер квартиры</th>
+        <th scope="col" style="width: 10%">Дом</th>
+        <th scope="col" style="width: 10%"></th>
+        <th scope="col" style="width: 10%"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tenant of tenants">
+        <td id="col1">{{tenant?.fio}}</td>
+        <td id="col2">{{tenant?.telNum}}</td>
+        <td id="col3">{{tenant?.apartmentNumber}}</td>
+        <td id="col4">{{tenant?.house?.houseId.street}}, {{tenant?.house?.houseId.houseNumber}}</td>
+        <td id="col5">
+          <button type="button" class="btn btn-danger" (click)="deleteTenant(tenant.tenantId!)">
+            🗑 Удалить
+          </button>
+        </td>
+        <td id="col6">
+          <button type="button" class="btn btn-warning button-center" data-bs-toggle="modal" data-bs-target="#addTenantModal"
+                  (click)="onEdit(tenant)">
+            ✏ Изменить
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="addTenantModal" tabindex="-1" role="dialog" aria-labelledby="addTenantModal"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{isUpdate ? 'Изменить' : 'Добавить'}} запись</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <form name="addForm">
+            <div class="form-group">
+              <label for="add-fio" class="col-form-label">ФИО:</label>
+              <input [(ngModel)]="selectedTenant.fio" name="fio" type="text" class="form-control"
+                     id="add-fio" #fio="ngModel" required />
+              <div [hidden]="fio.valid || fio.untouched" class="alert alert-danger">
+                Некорректное ФИО
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="add-telNum" class="col-form-label">Номер телефона:</label>
+              <input [(ngModel)]="selectedTenant.telNum" name="telNum" type="text" maxlength="12" class="form-control"
+                     id="add-telNum" #telNum="ngModel" required />
+              <div [hidden]="telNum.valid || telNum.untouched" class="alert alert-danger">
+                Некорректный номер телефона. Формат номера: +7xxxxxxxxxx
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="add-apartmentNumber" class="col-form-label">Номер квартиры:</label>
+              <input [(ngModel)]="selectedTenant.apartmentNumber" name="apartmentNumber" type="number" class="form-control"
+                     id="add-apartmentNumber" #apartmentNumber="ngModel" required />
+              <div [hidden]="apartmentNumber.valid || apartmentNumber.untouched" class="alert alert-danger">
+                Некорректный номер квартиры
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Дом:</label>
+              <ng-select [hideSelected]="true" placeholder="Выберите дом"
+                         (change)="onChangeSelectHouse($event)">
+                <ng-option *ngFor="let house of houses" [value]="house">
+                  {{house?.houseId!.street}}, {{house?.houseId!.houseNumber}}
+                </ng-option>
+              </ng-select></div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="isUpdate ? updateTenant() : addTenant()"
+                  data-bs-dismiss="modal"
+                  [disabled]="apartmentNumber.invalid || telNum.invalid || fio.invalid">Сохранить
+          </button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

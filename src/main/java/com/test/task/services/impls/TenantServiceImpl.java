@@ -32,7 +32,8 @@ public class TenantServiceImpl implements TenantService {
     public ResponseEntity<Tenant> updateTenant(Long id, Tenant tenant) {
         Tenant foundTenant = tenantRepo.findByTenantId(id);
         tenant.setTenantId(foundTenant.getTenantId());
-        tenantRepo.save(tenant);
+        tenantRepo.update(tenant.getApartmentNumber(), tenant.getFio(), tenant.getTelNum(),
+                tenant.getHouse().getHouseId().getHouseNumber(), tenant.getHouse().getHouseId().getStreet(), tenant.getTenantId());
         return ResponseEntity.ok().body(tenant);
     }
 

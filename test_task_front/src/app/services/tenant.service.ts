@@ -15,6 +15,26 @@ export class TenantService {
     return this.http.get<Tenant[]>(`${this.url}/get`);
   }
 
+  getTenantsByDistrict(district: string): Observable<Tenant[]> {
+    return this.http.get<Tenant[]>(`${this.url}/get?districtName=${district}`);
+  }
+
+  getTenantsByHouse(street: string, houseNumber: number): Observable<Tenant[]> {
+    return this.http.get<Tenant[]>(`${this.url}/get?street=${street}&houseNumber=${houseNumber}`);
+  }
+
+  getTenantsByStreet(street: string): Observable<Tenant[]> {
+    return this.http.get<Tenant[]>(`${this.url}/get?street=${street}`);
+  }
+
+  getTenantsByTelNum(telNum: string): Observable<Tenant[]> {
+    return this.http.get<Tenant[]>(`${this.url}/get?telNum=${telNum}`);
+  }
+
+  getTenantsByFio(fio: string): Observable<Tenant[]> {
+    return this.http.get<Tenant[]>(`${this.url}/get?fio=${fio}`);
+  }
+
   addTenant(tenant: Tenant): Observable<Tenant> {
     return this.http.post<Tenant>(`${this.url}/add`, tenant);
   }
