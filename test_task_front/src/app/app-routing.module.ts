@@ -5,7 +5,10 @@ import {HouseComponent} from "./components/house/house.component";
 import {TenantComponent} from "./components/tenant/tenant.component";
 
 const routes: Routes = [
-  { path: 'district', component: DistrictComponent }
+  { path: 'district', component: DistrictComponent },
+  { path: 'house', component: HouseComponent },
+  { path: 'tenant', component: TenantComponent },
+  { path: '**', component: DistrictComponent }
 ];
 
 @NgModule({

@@ -15,6 +15,14 @@ export class HouseService {
     return this.http.get<House[]>(`${this.url}/get`);
   }
 
+  getHousesByDistrict(district: string): Observable<House[]> {
+    return this.http.get<House[]>(`${this.url}/get?district=${district}`);
+  }
+
+  getHousesByStreet(street: string): Observable<House[]> {
+    return this.http.get<House[]>(`${this.url}/get?street=${street}`);
+  }
+
   addHouse(house: House): Observable<House> {
     return this.http.post<House>(`${this.url}/add`, house);
   }
