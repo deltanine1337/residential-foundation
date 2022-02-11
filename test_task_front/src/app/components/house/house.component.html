@@ -1,0 +1,152 @@
+<h2 style="margin-top: 15px;" align="center">Дома</h2>
+
+<div style="width: 95%; margin: 0 auto">
+    <div class="form-group" style="width: 100%;">
+      <table style="margin-top: 2%; width: 100%">
+      <tr>
+        <td style="width: 3%">Поиск</td>
+        <td style="width: 10%">
+          <ng-select [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
+                     (change)="onChangeSelectCriteria($event)" required>
+          </ng-select>
+        </td>
+        <td style="width: 30%">
+          <input type="text" class="form-control" [(ngModel)]="searchText"/>
+        </td>
+
+        <td style="width: 5%">
+          <button class="btn btn-primary" (click)="findHouses(searchText)">Найти</button>
+        </td>
+        <td style="width: 5%">
+          <button class="btn btn-danger" (click)="loadHouses()">Сброс</button>
+        </td>
+        <td align="right">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHouseModal"
+                  (click)="onCreate()">
+      ➕ Добавить
+    </button>
+        </td>
+      </tr>
+      </table>
+    </div>
+
+
+
+  <!--<div align="right" style="margin-right: 20px;" id="btnAddNew">-->
+    <!---->
+  <!--</div>-->
+
+
+
+<div align="center" style="margin-top: 25px;">
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+    <tr>
+      <th scope="col" style="width: 20%">Название улицы</th>
+      <th scope="col" style="width: 10%">Номер дома</th>
+      <th scope="col" style="width: 10%">Число квартир</th>
+      <th scope="col" style="width: 10%">Число подъездов</th>
+      <th scope="col" style="width: 10%">Этажность</th>
+      <th scope="col" style="width: 20%">Район</th>
+      <th scope="col" style="width: 10%"></th>
+      <th scope="col" style="width: 10%"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let house of houses">
+      <td id="col1">{{house?.houseId?.street}}</td>
+      <td id="col2">{{house?.houseId?.houseNumber}}</td>
+      <td id="col3">{{house?.numberOfApartments}}</td>
+      <td id="col4">{{house?.numberOfEntraces}}</td>
+      <td id="col5">{{house?.numberOfFloors}}</td>
+      <td id="col6">{{house?.district?.districtName!}}</td>
+      <td id="col7">
+        <button type="button" class="btn btn-danger" (click)="deleteHouse(house?.houseId.street!, house?.houseId.houseNumber!)">
+          🗑 Удалить
+        </button>
+      </td>
+      <td id="col8">
+        <button type="button" class="btn btn-warning button-center" data-bs-toggle="modal" data-bs-target="#addHouseModal"
+                (click)="onEdit(house)">
+          ✏ Изменить
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addHouseModal" tabindex="-1" role="dialog" aria-labelledby="addHouseModal"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{isUpdate ? 'Изменить' : 'Добавить'}} запись</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        <form name="addForm">
+          <div class="form-group">
+            <label for="add-street" class="col-form-label">Улица:</label>
+            <input [(ngModel)]="streeet" name="street" type="text" class="form-control"
+                   id="add-street" #street="ngModel" required />
+            <div [hidden]="street.valid || street.untouched" class="alert alert-danger">
+              Некорректное название улицы
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-houseNumber" class="col-form-label">Номер дома:</label>
+            <input [(ngModel)]="houseeNumber" name="houseNumber" type="number" class="form-control"
+                   id="add-houseNumber" #houseNumber="ngModel" required />
+            <div [hidden]="houseNumber.valid || houseNumber.untouched" class="alert alert-danger">
+              Некорректный номер дома
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-apNum" class="col-form-label">Число квартир:</label>
+            <input [(ngModel)]="selectedHouse.numberOfApartments" name="apNum" type="number" class="form-control"
+                   id="add-apNum" #apNum="ngModel" required />
+            <div [hidden]="apNum.valid || apNum.untouched" class="alert alert-danger">
+              Некорректное число квартир
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-entraces" class="col-form-label">Число подъездов:</label>
+            <input [(ngModel)]="selectedHouse.numberOfEntraces" name="entraces" type="number" class="form-control"
+                   id="add-entraces" #entraces="ngModel" required />
+            <div [hidden]="entraces.valid || entraces.untouched" class="alert alert-danger">
+              Некорректное число подъездов
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="add-floors" class="col-form-label">Этажность:</label>
+            <input [(ngModel)]="selectedHouse.numberOfFloors" name="floors" type="number" class="form-control"
+                   id="add-floors" #floors="ngModel" required />
+            <div [hidden]="floors.valid || floors.untouched" class="alert alert-danger">
+              Некорректная этажность
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Район:</label>
+            <ng-select placeholder="Выберите район" bindLabel="districtName"
+                       [items]="districts" (change)="onChangeSelectDistrict($event)">
+            </ng-select></div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="isUpdate ? updateHouse() : addHouse()"
+                data-bs-dismiss="modal"
+                [disabled]="floors.invalid || entraces.invalid || apNum.invalid || houseNumber.invalid ||
+                street.invalid">Сохранить
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
