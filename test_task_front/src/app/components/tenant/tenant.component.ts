@@ -34,7 +34,7 @@ export class TenantComponent implements OnInit {
   ngOnInit(): void {
     this.loadTenants();
     this.loadHouses();
-    this.criteria = ['по району', 'по дому', 'по улице', 'по телефону', 'по ФИО'];
+    this.criteria = ['по телефону', 'по ФИО'];
   }
 
   public loadTenants(){
@@ -42,6 +42,7 @@ export class TenantComponent implements OnInit {
       (items) => this.tenants = items,
       (error) => console.error(error)
     );
+    this.searchText = "";
   }
 
   public loadHouses(){
@@ -51,39 +52,24 @@ export class TenantComponent implements OnInit {
     );
   }
 
-  public findTenants(input: string): void{
-    switch (this.searchCriteria) {
-      case 'по району':
-        this.tenantService.getTenantsByDistrict(input).subscribe(
-          (items) => this.tenants = items,
-          (error) => console.error(error)
-        );
-        break;
-      case 'по дому':
-        this.tenantService.getTenantsByHouse(input.split(',')[0], Number(input.split(',')[1])).subscribe(
-          (items) => this.tenants = items,
-          (error) => console.error(error)
-        );
-        break;
-      case 'по улице':
-        this.tenantService.getTenantsByStreet(input).subscribe(
-          (items) => this.tenants = items,
-          (error) => console.error(error)
-        );
-        break;
-      case 'по телефону':
-        this.tenantService.getTenantsByTelNum(input).subscribe(
-          (items) => this.tenants = items,
-          (error) => console.error(error)
-        );
-        break;
-      case 'по ФИО':
-        this.tenantService.getTenantsByFio(input).subscribe(
-          (items) => this.tenants = items,
-          (error) => console.error(error)
-        );
-        break;
+  public findTenants(input: string): void {
+    if (this.searchText != "") {
+      switch (this.searchCriteria) {
+        case 'по телефону':
+          this.tenantService.getTenantsByTelNum(input).subscribe(
+            (items) => this.tenants = items,
+            (error) => console.error(error)
+          );
+          break;
+        case 'по ФИО':
+          this.tenantService.getTenantsByFio(input).subscribe(
+            (items) => this.tenants = items,
+            (error) => console.error(error)
+          );
+          break;
+      }
     }
+    else this.loadTenants();
   }
 
   public onCreate(): void {
@@ -121,6 +107,9 @@ export class TenantComponent implements OnInit {
 
   public onChangeSelectCriteria(selectedItem: string) {
     this.searchCriteria = selectedItem;
+    if (this.searchText != "") {
+      this.findTenants(this.searchText)
+    }
   }
 
   public onChangeSelectHouse(selectedItem: any) {

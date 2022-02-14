@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 
 public interface HouseService {
     Iterable<House> getHouses();
-    ResponseEntity<House> addHouse(House house);
+    House addHouse(House house);
     void deleteHouse(HouseId houseId);
-    ResponseEntity<House> updateHouse(HouseId houseId, House house);
+    House updateHouse(HouseId houseId, House house);
     Iterable<House> getHousesByStreet(String street);
     Iterable<House> getHousesByDistrict(String district);
     Iterable<House> findHouses(String district, String street);

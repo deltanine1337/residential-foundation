@@ -18,24 +18,23 @@ public class DistrictController {
         this.districtService = districtService;
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public Iterable<District> getDistricts(){
         return districtService.getDistricts();
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<District> addDistrict(@RequestBody District district){
+    @PostMapping
+    public District addDistrict(@RequestBody District district){
         return districtService.addDistrict(district);
     }
 
-    @Transactional
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteDistrict(@PathVariable("id") Long id){
         districtService.deleteDistrict(id);
     }
 
-    @PutMapping("update/{id}")
-    public ResponseEntity<District> updateDistrict(@PathVariable("id") Long id, @RequestBody District district){
+    @PutMapping("/{id}")
+    public District updateDistrict(@PathVariable("id") Long id, @RequestBody District district){
         return districtService.updateDistrict(id, district);
     }
 

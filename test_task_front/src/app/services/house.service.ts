@@ -12,26 +12,26 @@ export class HouseService {
   private url = "http://localhost:8080/house";
 
   getHouses(): Observable<House[]> {
-    return this.http.get<House[]>(`${this.url}/get`);
+    return this.http.get<House[]>(`${this.url}`);
   }
 
   getHousesByDistrict(district: string): Observable<House[]> {
-    return this.http.get<House[]>(`${this.url}/get?district=${district}`);
+    return this.http.get<House[]>(`${this.url}?district=${district}`);
   }
 
   getHousesByStreet(street: string): Observable<House[]> {
-    return this.http.get<House[]>(`${this.url}/get?street=${street}`);
+    return this.http.get<House[]>(`${this.url}?street=${street}`);
   }
 
   addHouse(house: House): Observable<House> {
-    return this.http.post<House>(`${this.url}/add`, house);
+    return this.http.post<House>(`${this.url}`, house);
   }
 
   deleteHouse(street: string, houseNumber: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/delete/${street}/${houseNumber}`);
+    return this.http.delete<void>(`${this.url}/${street}/${houseNumber}`);
   }
 
   updateHouse(street: string, houseNumber: number, house: House): Observable<House> {
-    return this.http.put<House>(`${this.url}/update/${street}/${houseNumber}`, house);
+    return this.http.put<House>(`${this.url}/${street}/${houseNumber}`, house);
   }
 }

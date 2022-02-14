@@ -50,23 +50,27 @@ export class HouseComponent implements OnInit {
       (items) => this.houses = items,
       (error) => console.error(error)
     );
+    this.searchText = "";
   }
 
   public findHouses(input: string): void{
-    switch (this.searchCriteria) {
-      case 'по району':
-        this.houseService.getHousesByDistrict(input).subscribe(
-          (items) => this.houses = items,
-          (error) => console.error(error)
-        );
-        break;
-      case 'по улице':
-        this.houseService.getHousesByStreet(input).subscribe(
-          (items) => this.houses = items,
-          (error) => console.error(error)
-        );
-        break;
+    if (this.searchText != "") {
+      switch (this.searchCriteria) {
+        case 'по району':
+          this.houseService.getHousesByDistrict(input).subscribe(
+            (items) => this.houses = items,
+            (error) => console.error(error)
+          );
+          break;
+        case 'по улице':
+          this.houseService.getHousesByStreet(input).subscribe(
+            (items) => this.houses = items,
+            (error) => console.error(error)
+          );
+          break;
+      }
     }
+    else this.loadHouses();
   }
 
   public onCreate(): void {
@@ -112,6 +116,9 @@ export class HouseComponent implements OnInit {
 
   public onChangeSelectCriteria(selectedItem: string) {
     this.searchCriteria = selectedItem;
+    if (this.searchText != "") {
+      this.findHouses(this.searchText)
+    }
   }
 
   public onChangeSelectDistrict(selectedItem: any) {

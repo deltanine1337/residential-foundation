@@ -16,24 +16,24 @@ public class TenantController {
         this.tenantService = tenantService;
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public Iterable<Tenant> getTenants(@RequestParam(required = false) String telNum,
                                        @RequestParam(required = false) String fio){
         return tenantService.findTenants(telNum, fio);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Tenant> addTenant(@RequestBody Tenant tenant){
+    @PostMapping
+    public Tenant addTenant(@RequestBody Tenant tenant){
         return tenantService.addTenant(tenant);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteTenant(@PathVariable("id") Long id){
         tenantService.deleteTenant(id);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Tenant> updateTenant(@PathVariable("id") Long id, @RequestBody Tenant tenant){
+    @PutMapping("/{id}")
+    public Tenant updateTenant(@PathVariable("id") Long id, @RequestBody Tenant tenant){
         return tenantService.updateTenant(id, tenant);
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface DistrictService {
     Iterable<District> getDistricts();
-    ResponseEntity<District> addDistrict(District district);
+    District addDistrict(District district);
     void deleteDistrict(Long id);
-    ResponseEntity<District> updateDistrict(Long id, District district);
+    District updateDistrict(Long id, District district);
 }

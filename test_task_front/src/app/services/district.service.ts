@@ -12,18 +12,18 @@ export class DistrictService {
   private url = "http://localhost:8080/district";
 
   getDistricts(): Observable<District[]> {
-    return this.http.get<District[]>(`${this.url}/get`);
+    return this.http.get<District[]>(`${this.url}`);
   }
 
   addDistrict(district: District): Observable<District> {
-    return this.http.post<District>(`${this.url}/add`, district);
+    return this.http.post<District>(`${this.url}`, district);
   }
 
   deleteDistrict(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/delete/${id}`);
+    return this.http.delete<void>(`${this.url}/${id}`);
   }
 
   updateDistrict(id: number, district: District): Observable<District> {
-    return this.http.put<District>(`${this.url}/update/${id}`, district);
+    return this.http.put<District>(`${this.url}/${id}`, district);
   }
 }

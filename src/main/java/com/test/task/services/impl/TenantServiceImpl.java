@@ -4,8 +4,9 @@ import com.test.task.model.Tenant;
 import com.test.task.repos.TenantRepo;
 import com.test.task.services.TenantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,24 +20,25 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public ResponseEntity<Tenant> addTenant(Tenant tenant) {
+    public Tenant addTenant(Tenant tenant) {
         tenantRepo.insert(tenant.getApartmentNumber(), tenant.getFio(), tenant.getTelNum(),
                 tenant.getHouse().getHouseId().getHouseNumber(), tenant.getHouse().getHouseId().getStreet());
-        return ResponseEntity.ok().body(tenant);
+        return tenant;
     }
 
     @Override
+    @Transactional
     public void deleteTenant(Long id) {
         tenantRepo.deleteById(id);
     }
 
     @Override
-    public ResponseEntity<Tenant> updateTenant(Long id, Tenant tenant) {
+    public Tenant updateTenant(Long id, Tenant tenant) {
         Tenant foundTenant = tenantRepo.findByTenantId(id);
         tenant.setTenantId(foundTenant.getTenantId());
         tenantRepo.update(tenant.getApartmentNumber(), tenant.getFio(), tenant.getTelNum(),
                 tenant.getHouse().getHouseId().getHouseNumber(), tenant.getHouse().getHouseId().getStreet(), tenant.getTenantId());
-        return ResponseEntity.ok().body(tenant);
+        return tenant;
     }
 
     @Override
@@ -61,7 +63,7 @@ public class TenantServiceImpl implements TenantService {
 
     @Override
     public Iterable<Tenant> getTenantsByFio(String fio) {
-        return tenantRepo.findAllByFio(fio);
+        return tenantRepo.findByFio(fio.toLowerCase());
     }
 
     @Override

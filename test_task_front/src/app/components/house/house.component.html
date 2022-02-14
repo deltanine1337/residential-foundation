@@ -6,16 +6,12 @@
       <tr>
         <td class="search-header">Поиск</td>
         <td class="search-criteria">
-          <ng-select [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
+          <ng-select [searchable]="false" [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
                      (change)="onChangeSelectCriteria($event)" required>
           </ng-select>
         </td>
         <td class="search-text">
-          <input type="text" class="form-control" [(ngModel)]="searchText"/>
-        </td>
-
-        <td class="search-button">
-          <button class="btn btn-primary" (click)="findHouses(searchText)">Найти</button>
+          <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="findHouses(searchText)"/>
         </td>
         <td class="search-button">
           <button class="btn btn-danger" (click)="loadHouses()">Сброс</button>
@@ -122,7 +118,7 @@
           </div>
           <div class="form-group">
             <label>Район:</label>
-            <ng-select placeholder="Выберите район" bindLabel="districtName"
+            <ng-select [searchable]="false" placeholder="Выберите район" bindLabel="districtName"
                        [items]="districts" (change)="onChangeSelectDistrict($event)">
             </ng-select></div>
         </form>

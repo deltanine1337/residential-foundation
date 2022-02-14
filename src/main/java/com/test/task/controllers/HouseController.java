@@ -19,27 +19,26 @@ public class HouseController {
         this.houseService = houseService;
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public Iterable<House> getHouses(@RequestParam(required = false) String district,
                                      @RequestParam(required = false) String street){
         return houseService.findHouses(district, street);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<House> addHouse(@RequestBody House house){
+    @PostMapping
+    public House addHouse(@RequestBody House house){
         return houseService.addHouse(house);
     }
 
-    @Transactional
-    @DeleteMapping("/delete/{street}/{houseNumber}")
+    @DeleteMapping("/{street}/{houseNumber}")
     public void deleteHouse(@PathVariable("street") String street, @PathVariable("houseNumber") int houseNumber){
         houseService.deleteHouse(new HouseId(street, houseNumber));
     }
 
-    @PutMapping("update/{street}/{houseNumber}")
-    public ResponseEntity<House> updateHouse(@PathVariable("street") String street,
-                                                           @PathVariable("houseNumber") int houseNumber,
-                                                           @RequestBody House house){
+    @PutMapping("/{street}/{houseNumber}")
+    public House updateHouse(@PathVariable("street") String street,
+                             @PathVariable("houseNumber") int houseNumber,
+                             @RequestBody House house){
         return houseService.updateHouse(new HouseId(street, houseNumber), house);
     }
 
