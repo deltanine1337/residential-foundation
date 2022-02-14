@@ -1,4 +1,4 @@
-package com.test.task.services.interfaces;
+package com.test.task.services;
 
 import com.test.task.model.District;
 import com.test.task.model.House;
@@ -15,4 +15,5 @@ public interface TenantService {
     Iterable<Tenant> getTenantsByHouse(String street, int houseNumber);
     Iterable<Tenant> getTenantsByTelNum(String telNum);
     Iterable<Tenant> getTenantsByFio(String fio);
+    Iterable<Tenant> findTenants(String telNum, String fio);
 }

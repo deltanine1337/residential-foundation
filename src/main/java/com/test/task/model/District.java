@@ -4,13 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
 @Table
 @Data
-public class District implements Serializable {
+public class District {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
@@ -19,5 +18,5 @@ public class District implements Serializable {
     private String districtName;
     @JsonIgnore
     @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<House> houses;
+    private Collection<House> houses;
 }

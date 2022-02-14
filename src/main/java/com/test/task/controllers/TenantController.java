@@ -1,7 +1,7 @@
 package com.test.task.controllers;
 
 import com.test.task.model.Tenant;
-import com.test.task.services.interfaces.TenantService;
+import com.test.task.services.TenantService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,26 +17,13 @@ public class TenantController {
     }
 
     @GetMapping("/get")
-    public Iterable<Tenant> getTenants(@RequestParam(required = false) String street,
-                                       @RequestParam(required = false) Integer houseNumber,
-                                       @RequestParam(required = false) String telNum,
-                                       @RequestParam(required = false) String districtName,
+    public Iterable<Tenant> getTenants(@RequestParam(required = false) String telNum,
                                        @RequestParam(required = false) String fio){
-        if (street != null && houseNumber == null)
-            return tenantService.getTenantsByStreet(street);
-        else if (houseNumber != null && street != null)
-            return tenantService.getTenantsByHouse(street, houseNumber);
-        else if (telNum != null)
-            return tenantService.getTenantsByTelNum("+" + telNum.replace(" ", ""));
-        else if (fio != null)
-            return tenantService.getTenantsByFio(fio);
-        else if (districtName != null)
-            return tenantService.getTenantsByDistrict(districtName);
-        else return tenantService.getTenants();
+        return tenantService.findTenants(telNum, fio);
     }
 
     @PostMapping("/add")
-    public @ResponseBody ResponseEntity<Tenant> addTenant(@RequestBody Tenant tenant){
+    public ResponseEntity<Tenant> addTenant(@RequestBody Tenant tenant){
         return tenantService.addTenant(tenant);
     }
 
@@ -46,7 +33,7 @@ public class TenantController {
     }
 
     @PutMapping("/update/{id}")
-    public @ResponseBody ResponseEntity<Tenant> updateTenant(@PathVariable("id") Long id, @RequestBody Tenant tenant){
+    public ResponseEntity<Tenant> updateTenant(@PathVariable("id") Long id, @RequestBody Tenant tenant){
         return tenantService.updateTenant(id, tenant);
     }
 }

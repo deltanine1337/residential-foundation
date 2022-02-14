@@ -1,7 +1,7 @@
 package com.test.task.controllers;
 
 import com.test.task.model.District;
-import com.test.task.services.interfaces.DistrictService;
+import com.test.task.services.DistrictService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class DistrictController {
     }
 
     @PostMapping("/add")
-    public @ResponseBody ResponseEntity<District> addDistrict(@RequestBody District district){
+    public ResponseEntity<District> addDistrict(@RequestBody District district){
         return districtService.addDistrict(district);
     }
 
@@ -35,7 +35,7 @@ public class DistrictController {
     }
 
     @PutMapping("update/{id}")
-    public @ResponseBody ResponseEntity<District> updateDistrict(@PathVariable("id") Long id, @RequestBody District district){
+    public ResponseEntity<District> updateDistrict(@PathVariable("id") Long id, @RequestBody District district){
         return districtService.updateDistrict(id, district);
     }
 

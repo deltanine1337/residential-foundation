@@ -1,55 +1,47 @@
-<h2 style="margin-top: 15px;" align="center">Дома</h2>
-
-<div style="width: 95%; margin: 0 auto">
-    <div class="form-group" style="width: 100%;">
-      <table style="margin-top: 2%; width: 100%">
+<h2>Дома</h2>
+<hr>
+<div class="main-div">
+    <div class="form-group">
+      <table class="search">
       <tr>
-        <td style="width: 3%">Поиск</td>
-        <td style="width: 10%">
+        <td class="search-header">Поиск</td>
+        <td class="search-criteria">
           <ng-select [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
                      (change)="onChangeSelectCriteria($event)" required>
           </ng-select>
         </td>
-        <td style="width: 30%">
+        <td class="search-text">
           <input type="text" class="form-control" [(ngModel)]="searchText"/>
         </td>
 
-        <td style="width: 5%">
+        <td class="search-button">
           <button class="btn btn-primary" (click)="findHouses(searchText)">Найти</button>
         </td>
-        <td style="width: 5%">
+        <td class="search-button">
           <button class="btn btn-danger" (click)="loadHouses()">Сброс</button>
         </td>
         <td align="right">
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHouseModal"
                   (click)="onCreate()">
-      ➕ Добавить
-    </button>
+            ➕ Добавить
+          </button>
         </td>
       </tr>
       </table>
     </div>
 
-
-
-  <!--<div align="right" style="margin-right: 20px;" id="btnAddNew">-->
-    <!---->
-  <!--</div>-->
-
-
-
-<div align="center" style="margin-top: 25px;">
+<div class="main-table">
   <table class="table table-bordered table-hover">
     <thead class="table-light">
     <tr>
-      <th scope="col" style="width: 20%">Название улицы</th>
-      <th scope="col" style="width: 10%">Номер дома</th>
-      <th scope="col" style="width: 10%">Число квартир</th>
-      <th scope="col" style="width: 10%">Число подъездов</th>
-      <th scope="col" style="width: 10%">Этажность</th>
-      <th scope="col" style="width: 20%">Район</th>
-      <th scope="col" style="width: 10%"></th>
-      <th scope="col" style="width: 10%"></th>
+      <th scope="col">Название улицы</th>
+      <th scope="col">Номер дома</th>
+      <th scope="col">Число квартир</th>
+      <th scope="col">Число подъездов</th>
+      <th scope="col">Этажность</th>
+      <th scope="col">Район</th>
+      <th scope="col" class="button-column"></th>
+      <th scope="col" class="button-column"></th>
     </tr>
     </thead>
     <tbody>
@@ -61,14 +53,14 @@
       <td id="col5">{{house?.numberOfFloors}}</td>
       <td id="col6">{{house?.district?.districtName!}}</td>
       <td id="col7">
-        <button type="button" class="btn btn-danger" (click)="deleteHouse(house?.houseId.street!, house?.houseId.houseNumber!)">
-          🗑 Удалить
+        <button type="button" class="btn btn-danger change-btn" (click)="deleteHouse(house?.houseId.street!, house?.houseId.houseNumber!)">
+          🗑
         </button>
       </td>
       <td id="col8">
-        <button type="button" class="btn btn-warning button-center" data-bs-toggle="modal" data-bs-target="#addHouseModal"
+        <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal" data-bs-target="#addHouseModal"
                 (click)="onEdit(house)">
-          ✏ Изменить
+          ✏
         </button>
       </td>
     </tr>

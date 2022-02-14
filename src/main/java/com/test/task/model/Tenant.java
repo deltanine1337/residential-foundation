@@ -3,12 +3,11 @@ package com.test.task.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table
 @Data
-public class Tenant implements Serializable {
+public class Tenant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column

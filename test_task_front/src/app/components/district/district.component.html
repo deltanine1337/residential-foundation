@@ -1,33 +1,34 @@
-<h2 style="margin-top: 15px;" align="center">Районы</h2>
-<div style="width: 95%; margin: 0 auto">
-<div align="right" style="margin-right: 20px; margin-top: 2%" id="btnAddNew">
+<h2>Районы</h2>
+<hr>
+<div class="main-div">
+<div class="add-button" id="btnAddNew">
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDistrictModal"
           (click)="onCreate()">
     ➕ Добавить
   </button>
 </div>
 
-<div align="center" style="margin-top: 25px;">
+<div align="center" class="main-table">
   <table class="table table-bordered table-hover">
     <thead class="table-light">
     <tr>
-      <th scope="col" style="width: 20%">Название</th>
-      <th scope="col" style="width: 10%"></th>
-      <th scope="col" style="width: 10%"></th>
+      <th scope="col">Название</th>
+      <th scope="col" class="button-column"></th>
+      <th scope="col" class="button-column"></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let district of districts ">
       <td id="col1">{{district?.districtName}}</td>
       <td id="col2">
-        <button type="button" class="btn btn-danger" (click)="deleteDistrict(district?.districtId!)">
-          🗑 Удалить
+        <button type="button" class="btn btn-danger change-btn" (click)="deleteDistrict(district?.districtId!)">
+          🗑
         </button>
       </td>
       <td id="col3">
-        <button type="button" class="btn btn-warning button-center" data-bs-toggle="modal" data-bs-target="#addDistrictModal"
+        <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal" data-bs-target="#addDistrictModal"
                 (click)="onEdit(district)">
-          ✏ Изменить
+          ✏
         </button>
       </td>
     </tr>

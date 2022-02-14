@@ -5,13 +5,12 @@ import com.test.task.model.keys.HouseId;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
+import java.util.Collection;
 
 @Entity
 @Table
 @Data
-public class House implements Serializable {
+public class House {
     @EmbeddedId
     private HouseId houseId;
     @Column(nullable = false)
@@ -25,5 +24,5 @@ public class House implements Serializable {
     private District district;
     @JsonIgnore
     @OneToMany(mappedBy = "house", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tenant> tenants;
+    private Collection<Tenant> tenants;
 }

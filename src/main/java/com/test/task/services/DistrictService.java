@@ -1,4 +1,4 @@
-package com.test.task.services.interfaces;
+package com.test.task.services;
 
 import com.test.task.model.District;
 import org.springframework.http.ResponseEntity;
