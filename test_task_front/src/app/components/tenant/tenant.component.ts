@@ -16,8 +16,8 @@ export class TenantComponent implements OnInit {
   private houseService: HouseService;
   private tenantService: TenantService;
 
-  houses: House[];
-  tenants: Tenant[];
+  houses: House[] = [];
+  tenants: Tenant[] = [];
   selectedTenant = new Tenant();
   selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
   isUpdate: boolean;

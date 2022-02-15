@@ -14,9 +14,9 @@ export class DistrictComponent implements OnInit {
   private districtService: DistrictService;
   private router: Router;
 
-  districts!: District[];
+  districts: District[] = [];
   selectedDistrict = new District(0, '');
-  isUpdate!: boolean;
+  isUpdate: boolean;
 
   constructor(districtService: DistrictService, router: Router) {
     this.districtService = districtService;

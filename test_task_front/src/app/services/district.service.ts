@@ -3,7 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {District} from "../model/district";
 import {Observable} from "rxjs";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class DistrictService {
 
   constructor(private http: HttpClient) {

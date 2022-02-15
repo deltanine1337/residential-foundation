@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {House} from "../model/house";
 import {Observable} from "rxjs";
 
@@ -16,11 +16,13 @@ export class HouseService {
   }
 
   getHousesByDistrict(district: string): Observable<House[]> {
-    return this.http.get<House[]>(`${this.url}?district=${district}`);
+    let params = new HttpParams().set('district', district);
+    return this.http.get<House[]>(this.url, {params});
   }
 
   getHousesByStreet(street: string): Observable<House[]> {
-    return this.http.get<House[]>(`${this.url}?street=${street}`);
+    let params = new HttpParams().set('street', street);
+    return this.http.get<House[]>(this.url, {params});
   }
 
   addHouse(house: House): Observable<House> {

@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Tenant} from "../model/tenant";
 
@@ -15,28 +15,18 @@ export class TenantService {
     return this.http.get<Tenant[]>(`${this.url}`);
   }
 
-  getTenantsByDistrict(district: string): Observable<Tenant[]> {
-    return this.http.get<Tenant[]>(`${this.url}?districtName=${district}`);
-  }
-
-  getTenantsByHouse(street: string, houseNumber: number): Observable<Tenant[]> {
-    return this.http.get<Tenant[]>(`${this.url}?street=${street}&houseNumber=${houseNumber}`);
-  }
-
-  getTenantsByStreet(street: string): Observable<Tenant[]> {
-    return this.http.get<Tenant[]>(`${this.url}?street=${street}`);
-  }
-
   getTenantsByTelNum(telNum: string): Observable<Tenant[]> {
-    return this.http.get<Tenant[]>(`${this.url}?telNum=${telNum}`);
+    let params = new HttpParams().set('telNum', telNum);
+    return this.http.get<Tenant[]>(this.url, {params});
   }
 
   getTenantsByFio(fio: string): Observable<Tenant[]> {
-    return this.http.get<Tenant[]>(`${this.url}?fio=${fio}`);
+    let params = new HttpParams().set('fio', fio);
+    return this.http.get<Tenant[]>(this.url, {params});
   }
 
   addTenant(tenant: Tenant): Observable<Tenant> {
-    return this.http.post<Tenant>(`${this.url}`, tenant);
+    return this.http.post<Tenant>(this.url, tenant);
   }
 
   deleteTenant(id: number): Observable<void> {
