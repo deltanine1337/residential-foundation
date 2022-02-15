@@ -16,15 +16,17 @@ export class TenantComponent implements OnInit {
   private houseService: HouseService;
   private tenantService: TenantService;
 
-  houses!: House[];
-  tenants!: Tenant[];
+  houses: House[];
+  tenants: Tenant[];
   selectedTenant = new Tenant();
   selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
-  isUpdate!: boolean;
+  isUpdate: boolean;
+  isHouseChanged: boolean;
 
   searchCriteria!: string;
   criteria!: string[];
   searchText!: string;
+  phonePattern = "\\+{1}7{1}\\d{10}";
 
   constructor(houseService: HouseService, tenantService: TenantService) {
     this.houseService = houseService;
@@ -35,6 +37,7 @@ export class TenantComponent implements OnInit {
     this.loadTenants();
     this.loadHouses();
     this.criteria = ['по телефону', 'по ФИО'];
+    this.isHouseChanged = false;
   }
 
   public loadTenants(){
@@ -75,11 +78,16 @@ export class TenantComponent implements OnInit {
   public onCreate(): void {
     this.isUpdate = false;
     this.selectedTenant = new Tenant();
+    if (this.selectedHouse.houseId == null){
+      this.isHouseChanged = false;
+    }
+    this.selectedHouse = null;
   }
 
   public onEdit(tenant: Tenant): void {
     this.isUpdate = true;
     this.selectedTenant = JSON.parse(JSON.stringify(tenant));
+    this.selectedHouse = this.selectedTenant.house;
   }
 
   public addTenant(): void {
@@ -115,5 +123,6 @@ export class TenantComponent implements OnInit {
   public onChangeSelectHouse(selectedItem: any) {
     this.selectedHouse = new House(selectedItem.houseId, selectedItem.numberOfApartments, selectedItem.numberOfFloors,
       selectedItem.numberOfEntraces, selectedItem.district);
+    this.isHouseChanged = true;
   }
 }

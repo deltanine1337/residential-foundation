@@ -15,16 +15,17 @@ export class HouseComponent implements OnInit {
   private houseService: HouseService;
   private districtService: DistrictService;
 
-  houses!: House[];
-  districts!: District[];
+  houses: House[] = [];
+  districts: District[] = [];
   selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
-  isUpdate!: boolean;
-  streeet!: string;
-  houseeNumber!: number;
-  searchCriteria!: string;
-  criteria!: string[];
+  isUpdate: boolean;
+  streeet: string;
+  houseeNumber: number;
+  searchCriteria: string;
+  criteria: string[];
   selectedDistrict = new District(0, '');
-  searchText!: string;
+  searchText: string;
+  isDistrictChanged: boolean;
 
 
   constructor(houseService: HouseService, districtService: DistrictService) {
@@ -36,6 +37,7 @@ export class HouseComponent implements OnInit {
     this.loadHouses();
     this.loadDistricts();
     this.criteria = ['по району', 'по улице'];
+    this.isDistrictChanged = false;
   }
 
   public loadDistricts(): void{
@@ -76,6 +78,12 @@ export class HouseComponent implements OnInit {
   public onCreate(): void {
     this.isUpdate = false;
     this.selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
+    if (this.selectedHouse.district.districtId == 0) {
+      this.isDistrictChanged = false;
+    }
+    this.streeet = "";
+    this.houseeNumber = 0;
+    this.selectedDistrict = null;
   }
 
 
@@ -83,7 +91,9 @@ export class HouseComponent implements OnInit {
     this.isUpdate = true;
     this.selectedHouse = JSON.parse(JSON.stringify(house));
     this.streeet = this.selectedHouse.houseId.street;
-    this.houseeNumber = this.selectedHouse.houseId.houseNumber
+    this.houseeNumber = this.selectedHouse.houseId.houseNumber;
+    this.selectedDistrict = this.selectedHouse.district;
+    this.isDistrictChanged = true;
   }
 
   public addHouse(): void {
@@ -123,5 +133,6 @@ export class HouseComponent implements OnInit {
 
   public onChangeSelectDistrict(selectedItem: any) {
     this.selectedDistrict = new District(selectedItem.districtId, selectedItem.districtName);
+    this.isDistrictChanged = true;
   }
 }

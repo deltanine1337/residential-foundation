@@ -32,8 +32,7 @@
       <tr>
         <th scope="col">ФИО</th>
         <th scope="col">Номер телефона</th>
-        <th scope="col">Номер квартиры</th>
-        <th scope="col">Дом</th>
+        <th scope="col">Адрес</th>
         <th scope="col" class="button-column"></th>
         <th scope="col" class="button-column"></th>
       </tr>
@@ -42,17 +41,16 @@
       <tr *ngFor="let tenant of tenants">
         <td id="col1">{{tenant?.fio}}</td>
         <td id="col2">{{tenant?.telNum}}</td>
-        <td id="col3">{{tenant?.apartmentNumber}}</td>
-        <td id="col4">{{tenant?.house?.houseId.street}}, {{tenant?.house?.houseId.houseNumber}}</td>
+        <td id="col4">р. {{tenant?.house?.district?.districtName}}, ул.{{tenant?.house?.houseId.street}}, д.{{tenant?.house?.houseId.houseNumber}}, кв. {{tenant?.apartmentNumber}}</td>
         <td id="col5">
-          <button type="button" class="btn btn-danger change-btn" (click)="deleteTenant(tenant.tenantId!)">
-            🗑
-          </button>
-        </td>
-        <td id="col6">
           <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal" data-bs-target="#addTenantModal"
                   (click)="onEdit(tenant)">
             ✏
+          </button>
+        </td>
+        <td id="col6">
+          <button type="button" class="btn btn-danger change-btn" (click)="deleteTenant(tenant.tenantId!)">
+            🗑
           </button>
         </td>
       </tr>
@@ -82,7 +80,7 @@
             </div>
             <div class="form-group">
               <label for="add-telNum" class="col-form-label">Номер телефона:</label>
-              <input [(ngModel)]="selectedTenant.telNum" name="telNum" type="text" maxlength="12" class="form-control"
+              <input [(ngModel)]="selectedTenant.telNum" name="telNum" type="tel" maxlength="12" class="form-control"
                      id="add-telNum" #telNum="ngModel" required />
               <div [hidden]="telNum.valid || telNum.untouched" class="alert alert-danger">
                 Некорректный номер телефона. Формат номера: +7xxxxxxxxxx
@@ -101,7 +99,7 @@
               <ng-select [searchable]="false" [hideSelected]="true" placeholder="Выберите дом"
                          (change)="onChangeSelectHouse($event)">
                 <ng-option *ngFor="let house of houses" [value]="house">
-                  {{house?.houseId!.street}}, {{house?.houseId!.houseNumber}}
+                  р. {{house?.district?.districtName}}, ул. {{house?.houseId!.street}}, д. {{house?.houseId!.houseNumber}}
                 </ng-option>
               </ng-select></div>
           </form>
@@ -110,7 +108,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-primary" (click)="isUpdate ? updateTenant() : addTenant()"
                   data-bs-dismiss="modal"
-                  [disabled]="apartmentNumber.invalid || telNum.invalid || fio.invalid">Сохранить
+                  [disabled]="apartmentNumber.invalid || telNum.invalid || fio.invalid || !isHouseChanged">Сохранить
           </button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
 

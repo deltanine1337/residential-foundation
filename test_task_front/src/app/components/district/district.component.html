@@ -21,15 +21,16 @@
     <tr *ngFor="let district of districts ">
       <td id="col1">{{district?.districtName}}</td>
       <td id="col2">
-        <button type="button" class="btn btn-danger change-btn" (click)="deleteDistrict(district?.districtId!)">
-          🗑
-        </button>
-      </td>
-      <td id="col3">
         <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal" data-bs-target="#addDistrictModal"
                 (click)="onEdit(district)">
           ✏
         </button>
+      </td>
+      <td id="col3">
+        <button type="button" class="btn btn-danger change-btn" (click)="deleteDistrict(district?.districtId!)">
+          🗑
+        </button>
+
       </td>
     </tr>
     </tbody>
