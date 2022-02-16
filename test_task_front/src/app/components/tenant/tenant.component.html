@@ -6,7 +6,8 @@
       <tr>
         <td class="search-header">Поиск</td>
         <td class="search-criteria">
-          <ng-select [searchable]="false" [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
+          <ng-select [searchable]="false" bindValue="value" bindLabel="name"
+                     [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
                      (change)="onChangeSelectCriteria($event)" required>
           </ng-select>
         </td>
@@ -80,7 +81,7 @@
             </div>
             <div class="form-group">
               <label for="add-telNum" class="col-form-label">Номер телефона:</label>
-              <input [(ngModel)]="selectedTenant.telNum" name="telNum" type="tel" maxlength="12" class="form-control"
+              <input [(ngModel)]="selectedTenant.telNum" name="telNum" [pattern]="phonePattern" type="tel" maxlength="12" class="form-control"
                      id="add-telNum" #telNum="ngModel" required />
               <div [hidden]="telNum.valid || telNum.untouched" class="alert alert-danger">
                 Некорректный номер телефона. Формат номера: +7xxxxxxxxxx

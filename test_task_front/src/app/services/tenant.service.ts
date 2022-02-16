@@ -2,8 +2,12 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Tenant} from "../model/tenant";
+import {House} from "../model/house";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class TenantService {
 
   constructor(private http: HttpClient) {
@@ -11,17 +15,14 @@ export class TenantService {
 
   private url = "http://localhost:8080/tenant";
 
-  getTenants(): Observable<Tenant[]> {
-    return this.http.get<Tenant[]>(`${this.url}`);
-  }
-
-  getTenantsByTelNum(telNum: string): Observable<Tenant[]> {
-    let params = new HttpParams().set('telNum', telNum);
-    return this.http.get<Tenant[]>(this.url, {params});
-  }
-
-  getTenantsByFio(fio: string): Observable<Tenant[]> {
-    let params = new HttpParams().set('fio', fio);
+  getTenants(telNum?: string, fio?: string): Observable<Tenant[]> {
+    let params = new HttpParams();
+    if(telNum) {
+      params = params.set('telNum', telNum);
+    }
+    if(fio) {
+      params = params.set('fio', fio);
+    }
     return this.http.get<Tenant[]>(this.url, {params});
   }
 

@@ -6,7 +6,8 @@
       <tr>
         <td class="search-header">Поиск</td>
         <td class="search-criteria">
-          <ng-select [searchable]="false" [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
+          <ng-select [searchable]="false" [items]="criteria" [hideSelected]="true" bindLabel="name" bindValue="value"
+                     [(ngModel)]="searchCriteria" placeholder="Выберите критерий"
                      (change)="onChangeSelectCriteria($event)" required>
           </ng-select>
         </td>
@@ -84,6 +85,7 @@
               Некорректное название улицы
             </div>
           </div>
+          {{houseeNumber}}
           <div class="form-group">
             <label for="add-houseNumber" class="col-form-label">Номер дома:</label>
             <input [(ngModel)]="houseeNumber" [readonly]="isUpdate" placeholder="" name="houseNumber" type="number" class="form-control"
@@ -94,7 +96,7 @@
           </div>
           <div class="form-group">
             <label for="add-apNum" class="col-form-label">Число квартир:</label>
-            <input [(ngModel)]="selectedHouse.numberOfApartments" placeholder="1.0" name="apNum" type="number" class="form-control"
+            <input [(ngModel)]="selectedHouse.numberOfApartments" placeholder="" name="apNum" type="number" class="form-control"
                    id="add-apNum" #apNum="ngModel" required />
             <div [hidden]="apNum.valid || apNum.untouched" class="alert alert-danger">
               Некорректное число квартир

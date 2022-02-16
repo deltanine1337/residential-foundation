@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DistrictService} from "../../services/district.service";
 import {District} from "../../model/district";
 import {Router} from "@angular/router";
@@ -10,24 +10,19 @@ import {Router} from "@angular/router";
   providers: [DistrictService]
 })
 export class DistrictComponent implements OnInit {
-
-  private districtService: DistrictService;
-  private router: Router;
-
   districts: District[] = [];
   selectedDistrict = new District(0, '');
   isUpdate: boolean;
 
-  constructor(districtService: DistrictService, router: Router) {
-    this.districtService = districtService;
-    this.router = router;
+  constructor(private districtService: DistrictService, private router: Router) {
+
   }
 
   ngOnInit(): void {
     this.loadDistricts();
   }
 
-  public loadDistricts(): void{
+  public loadDistricts(): void {
     this.districtService.getDistricts().subscribe(
       (items) => this.districts = items,
       (error) => console.error(error)

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HouseService} from "../../services/house.service";
 import {House} from "../../model/house";
 import {DistrictService} from "../../services/district.service";
 import {District} from "../../model/district";
+import {SEARCH_HOUSE_CRITERIAS} from "../../consts/search.const";
+import {ISearch} from "../../model/search";
+import {ESearchHouseCriteria} from "../../model/enums/search.enum";
 
 @Component({
   selector: 'app-house',
@@ -11,43 +14,38 @@ import {District} from "../../model/district";
   providers: [DistrictService, HouseService]
 })
 export class HouseComponent implements OnInit {
-
-  private houseService: HouseService;
-  private districtService: DistrictService;
-
   houses: House[] = [];
   districts: District[] = [];
   selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
   isUpdate: boolean;
   streeet: string;
   houseeNumber: number;
-  searchCriteria: string;
-  criteria: string[];
+  searchCriteria: ESearchHouseCriteria;
+  criteria: ISearch[];
   selectedDistrict = new District(0, '');
   searchText: string;
   isDistrictChanged: boolean;
 
 
-  constructor(houseService: HouseService, districtService: DistrictService) {
-    this.houseService = houseService;
-    this.districtService = districtService;
+
+  constructor(private houseService: HouseService, private districtService: DistrictService) {
   }
 
   ngOnInit(): void {
     this.loadHouses();
     this.loadDistricts();
-    this.criteria = ['по району', 'по улице'];
+    this.criteria = SEARCH_HOUSE_CRITERIAS;
     this.isDistrictChanged = false;
   }
 
-  public loadDistricts(): void{
+  public loadDistricts(): void {
     this.districtService.getDistricts().subscribe(
       (items) => this.districts = items,
       (error) => console.error(error)
     );
   }
 
-  public loadHouses(): void{
+  public loadHouses(): void {
     this.houseService.getHouses().subscribe(
       (items) => this.houses = items,
       (error) => console.error(error)
@@ -55,17 +53,17 @@ export class HouseComponent implements OnInit {
     this.searchText = "";
   }
 
-  public findHouses(input: string): void{
+  public findHouses(input: string): void {
     if (this.searchText != "") {
       switch (this.searchCriteria) {
-        case 'по району':
-          this.houseService.getHousesByDistrict(input).subscribe(
+        case ESearchHouseCriteria.District:
+          this.houseService.getHouses("", input).subscribe(
             (items) => this.houses = items,
             (error) => console.error(error)
           );
           break;
-        case 'по улице':
-          this.houseService.getHousesByStreet(input).subscribe(
+        case ESearchHouseCriteria.Street:
+          this.houseService.getHouses(input, "").subscribe(
             (items) => this.houses = items,
             (error) => console.error(error)
           );
@@ -77,13 +75,14 @@ export class HouseComponent implements OnInit {
 
   public onCreate(): void {
     this.isUpdate = false;
-    this.selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
+    this.selectedHouse = new House(null, null, null, null, new District(0, ''));
     if (this.selectedHouse.district.districtId == 0) {
       this.isDistrictChanged = false;
     }
     this.streeet = "";
-    this.houseeNumber = 0;
+    this.houseeNumber = null;
     this.selectedDistrict = null;
+
   }
 
 
@@ -98,8 +97,8 @@ export class HouseComponent implements OnInit {
 
   public addHouse(): void {
     this.selectedHouse.houseId = {
-      'street' : this.streeet,
-      'houseNumber' : this.houseeNumber
+      'street': this.streeet,
+      'houseNumber': this.houseeNumber
     };
     this.selectedHouse.district = this.selectedDistrict;
     this.houseService.addHouse(this.selectedHouse).subscribe(
@@ -125,7 +124,6 @@ export class HouseComponent implements OnInit {
 
 
   public onChangeSelectCriteria(selectedItem: string) {
-    this.searchCriteria = selectedItem;
     if (this.searchText != "") {
       this.findHouses(this.searchText)
     }

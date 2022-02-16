@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HouseService} from "../../services/house.service";
 import {TenantService} from "../../services/tenant.service";
 import {House} from "../../model/house";
 import {Tenant} from "../../model/tenant";
 import {District} from "../../model/district";
+import {ISearch} from "../../model/search";
+import {SEARCH_TENANT_CRITERIAS} from "../../consts/search.const";
+import {ESearchTenantCriteria} from "../../model/enums/search.enum";
 
 @Component({
   selector: 'app-tenant',
@@ -12,10 +15,6 @@ import {District} from "../../model/district";
   providers: [HouseService, TenantService]
 })
 export class TenantComponent implements OnInit {
-
-  private houseService: HouseService;
-  private tenantService: TenantService;
-
   houses: House[] = [];
   tenants: Tenant[] = [];
   selectedTenant = new Tenant();
@@ -23,20 +22,18 @@ export class TenantComponent implements OnInit {
   isUpdate: boolean;
   isHouseChanged: boolean;
 
-  searchCriteria!: string;
-  criteria!: string[];
-  searchText!: string;
+  searchCriteria: ESearchTenantCriteria;
+  criteria: ISearch[];
+  searchText: string;
   phonePattern = "\\+{1}7{1}\\d{10}";
 
-  constructor(houseService: HouseService, tenantService: TenantService) {
-    this.houseService = houseService;
-    this.tenantService = tenantService;
+  constructor(private houseService: HouseService, private tenantService: TenantService) {
   }
 
   ngOnInit(): void {
     this.loadTenants();
     this.loadHouses();
-    this.criteria = ['по телефону', 'по ФИО'];
+    this.criteria = SEARCH_TENANT_CRITERIAS;
     this.isHouseChanged = false;
   }
 
@@ -58,14 +55,14 @@ export class TenantComponent implements OnInit {
   public findTenants(input: string): void {
     if (this.searchText != "") {
       switch (this.searchCriteria) {
-        case 'по телефону':
-          this.tenantService.getTenantsByTelNum(input).subscribe(
+        case ESearchTenantCriteria.TelNum:
+          this.tenantService.getTenants(input, "").subscribe(
             (items) => this.tenants = items,
             (error) => console.error(error)
           );
           break;
-        case 'по ФИО':
-          this.tenantService.getTenantsByFio(input).subscribe(
+        case ESearchTenantCriteria.Fio:
+          this.tenantService.getTenants("", input).subscribe(
             (items) => this.tenants = items,
             (error) => console.error(error)
           );
@@ -114,7 +111,6 @@ export class TenantComponent implements OnInit {
   }
 
   public onChangeSelectCriteria(selectedItem: string) {
-    this.searchCriteria = selectedItem;
     if (this.searchText != "") {
       this.findTenants(this.searchText)
     }

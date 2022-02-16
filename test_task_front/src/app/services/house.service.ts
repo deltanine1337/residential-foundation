@@ -3,7 +3,10 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {House} from "../model/house";
 import {Observable} from "rxjs";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
+
 export class HouseService {
 
   constructor(private http: HttpClient) {
@@ -11,17 +14,14 @@ export class HouseService {
 
   private url = "http://localhost:8080/house";
 
-  getHouses(): Observable<House[]> {
-    return this.http.get<House[]>(`${this.url}`);
-  }
-
-  getHousesByDistrict(district: string): Observable<House[]> {
-    let params = new HttpParams().set('district', district);
-    return this.http.get<House[]>(this.url, {params});
-  }
-
-  getHousesByStreet(street: string): Observable<House[]> {
-    let params = new HttpParams().set('street', street);
+  getHouses(street?: string, district?: string): Observable<House[]> {
+    let params = new HttpParams();
+    if(street) {
+      params = params.set('street', street);
+    }
+    if(district) {
+      params = params.set('district', district);
+    }
     return this.http.get<House[]>(this.url, {params});
   }
 
