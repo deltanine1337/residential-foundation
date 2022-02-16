@@ -9,10 +9,6 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 
 public interface TenantRepo extends JpaRepository<Tenant, Long> {
-
-    @Query(value = "select * from tenant where street = :street and house_number = :houseNumber", nativeQuery = true)
-    Iterable<Tenant> findByHouse(@Param("street") String street, @Param("houseNumber") int houseNumber);
-
     @Modifying
     @Transactional
     @Query(value = "insert into tenant(apartment_number,fio,tel_num,house_number, street) " +
@@ -31,14 +27,8 @@ public interface TenantRepo extends JpaRepository<Tenant, Long> {
     @Query(value = "select * from tenant where lower(fio) like %:fio%", nativeQuery = true)
     Iterable<Tenant> findByFio(@Param("fio") String fio);
 
-    @Query(value = "select * from tenant where (house_number, street) in (select house_number, street from house where " +
-            "district_id in (select district_id from district where district_name = :district))", nativeQuery = true)
-    Iterable<Tenant> findAllByDistrict(@Param("district") String district);
-
-    @Query(value = "select * from tenant where street = :street", nativeQuery = true)
-    Iterable<Tenant> findAllByStreet(@Param("street") String street);
-
-    Iterable<Tenant> findAllByTelNum(String telnum);
+    @Query(value = "select * from tenant where tel_num like %:telNum%", nativeQuery = true)
+    Iterable<Tenant> findAllByTelNum(@Param("telNum") String telNum);
 
     Tenant findByTenantId(Long id);
 }

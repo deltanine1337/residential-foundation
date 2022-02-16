@@ -10,6 +10,9 @@ import { DistrictComponent } from './components/district/district.component';
 import { HouseComponent } from './components/house/house.component';
 import { TenantComponent } from './components/tenant/tenant.component';
 import { HttpClientModule } from "@angular/common/http";
+import { DistrictModalComponent } from './components/district-modal/district-modal.component';
+import { HouseModalComponent } from './components/house-modal/house-modal.component';
+import { TenantModalComponent } from './components/tenant-modal/tenant-modal.component';
 
 
 
@@ -18,7 +21,10 @@ import { HttpClientModule } from "@angular/common/http";
     AppComponent,
     DistrictComponent,
     HouseComponent,
-    TenantComponent
+    TenantComponent,
+    DistrictModalComponent,
+    HouseModalComponent,
+    TenantModalComponent
   ],
   imports: [
     HttpClientModule,

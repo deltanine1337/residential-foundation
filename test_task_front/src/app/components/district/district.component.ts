@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {DistrictService} from "../../services/district.service";
 import {District} from "../../model/district";
 import {Router} from "@angular/router";
+import {DistrictModalComponent} from "../district-modal/district-modal.component";
 
 @Component({
   selector: 'app-district',
@@ -10,12 +11,11 @@ import {Router} from "@angular/router";
   providers: [DistrictService]
 })
 export class DistrictComponent implements OnInit {
+  @ViewChild(DistrictModalComponent)
+  districtModalComponent: DistrictModalComponent;
   districts: District[] = [];
-  selectedDistrict = new District(0, '');
-  isUpdate: boolean;
 
   constructor(private districtService: DistrictService, private router: Router) {
-
   }
 
   ngOnInit(): void {
@@ -30,20 +30,13 @@ export class DistrictComponent implements OnInit {
   }
 
   public onCreate(): void {
-    this.isUpdate = false;
-    this.selectedDistrict = new District(0, '');
+    this.districtModalComponent.isUpdate = false;
+    this.districtModalComponent.selectedDistrict = new District(0, '');
   }
 
   public onEdit(district: District): void {
-    this.isUpdate = true;
-    this.selectedDistrict = JSON.parse(JSON.stringify(district));
-  }
-
-  public addDistrict(): void {
-    this.districtService.addDistrict(this.selectedDistrict).subscribe(
-      () => this.loadDistricts(),
-      (error) => console.error(error)
-    );
+    this.districtModalComponent.isUpdate = true;
+    this.districtModalComponent.selectedDistrict = JSON.parse(JSON.stringify(district));
   }
 
   public deleteDistrict(id: number): void {
@@ -52,12 +45,4 @@ export class DistrictComponent implements OnInit {
       (error) => console.error(error)
     );
   }
-
-  public updateDistrict(): void {
-    this.districtService.updateDistrict(this.selectedDistrict.districtId, this.selectedDistrict).subscribe(
-      () => this.loadDistricts(),
-      (error) => console.error(error)
-    );
-  }
-
 }

@@ -10,9 +10,6 @@ public interface TenantService {
     Tenant addTenant(Tenant tenant);
     void deleteTenant(Long id);
     Tenant updateTenant(Long id, Tenant tenant);
-    Iterable<Tenant> getTenantsByStreet(String street);
-    Iterable<Tenant> getTenantsByDistrict(String districtName);
-    Iterable<Tenant> getTenantsByHouse(String street, int houseNumber);
     Iterable<Tenant> getTenantsByTelNum(String telNum);
     Iterable<Tenant> getTenantsByFio(String fio);
     Iterable<Tenant> findTenants(String telNum, String fio);

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HouseService} from "../../services/house.service";
 import {House} from "../../model/house";
 import {DistrictService} from "../../services/district.service";
@@ -6,6 +6,7 @@ import {District} from "../../model/district";
 import {SEARCH_HOUSE_CRITERIAS} from "../../consts/search.const";
 import {ISearch} from "../../model/search";
 import {ESearchHouseCriteria} from "../../model/enums/search.enum";
+import {HouseModalComponent} from "../house-modal/house-modal.component";
 
 @Component({
   selector: 'app-house',
@@ -14,19 +15,12 @@ import {ESearchHouseCriteria} from "../../model/enums/search.enum";
   providers: [DistrictService, HouseService]
 })
 export class HouseComponent implements OnInit {
+  @ViewChild(HouseModalComponent)
+  houseModalComponent: HouseModalComponent;
   houses: House[] = [];
-  districts: District[] = [];
-  selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
-  isUpdate: boolean;
-  streeet: string;
-  houseeNumber: number;
   searchCriteria: ESearchHouseCriteria;
   criteria: ISearch[];
-  selectedDistrict = new District(0, '');
   searchText: string;
-  isDistrictChanged: boolean;
-
-
 
   constructor(private houseService: HouseService, private districtService: DistrictService) {
   }
@@ -35,12 +29,12 @@ export class HouseComponent implements OnInit {
     this.loadHouses();
     this.loadDistricts();
     this.criteria = SEARCH_HOUSE_CRITERIAS;
-    this.isDistrictChanged = false;
+    this.houseModalComponent.isDistrictChanged = false;
   }
 
   public loadDistricts(): void {
     this.districtService.getDistricts().subscribe(
-      (items) => this.districts = items,
+      (items) => this.houseModalComponent.districts = items,
       (error) => console.error(error)
     );
   }
@@ -74,37 +68,23 @@ export class HouseComponent implements OnInit {
   }
 
   public onCreate(): void {
-    this.isUpdate = false;
-    this.selectedHouse = new House(null, null, null, null, new District(0, ''));
-    if (this.selectedHouse.district.districtId == 0) {
-      this.isDistrictChanged = false;
+    this.houseModalComponent.isUpdate = false;
+    this.houseModalComponent.selectedHouse = new House(null, null, null, null, new District(0, ''));
+    if (this.houseModalComponent.selectedHouse.district.districtId == 0) {
+      this.houseModalComponent.isDistrictChanged = false;
     }
-    this.streeet = "";
-    this.houseeNumber = null;
-    this.selectedDistrict = null;
-
+    this.houseModalComponent.streeet = "";
+    this.houseModalComponent.houseeNumber = null;
+    this.houseModalComponent.selectedDistrict = null;
   }
-
 
   public onEdit(house: House): void {
-    this.isUpdate = true;
-    this.selectedHouse = JSON.parse(JSON.stringify(house));
-    this.streeet = this.selectedHouse.houseId.street;
-    this.houseeNumber = this.selectedHouse.houseId.houseNumber;
-    this.selectedDistrict = this.selectedHouse.district;
-    this.isDistrictChanged = true;
-  }
-
-  public addHouse(): void {
-    this.selectedHouse.houseId = {
-      'street': this.streeet,
-      'houseNumber': this.houseeNumber
-    };
-    this.selectedHouse.district = this.selectedDistrict;
-    this.houseService.addHouse(this.selectedHouse).subscribe(
-      () => this.loadHouses(),
-      (error) => console.error(error)
-    );
+    this.houseModalComponent.isUpdate = true;
+    this.houseModalComponent.selectedHouse = JSON.parse(JSON.stringify(house));
+    this.houseModalComponent.streeet = this.houseModalComponent.selectedHouse.houseId.street;
+    this.houseModalComponent.houseeNumber = this.houseModalComponent.selectedHouse.houseId.houseNumber;
+    this.houseModalComponent.selectedDistrict = this.houseModalComponent.selectedHouse.district;
+    this.houseModalComponent.isDistrictChanged = true;
   }
 
   public deleteHouse(street: string, houseNumber: number): void {
@@ -114,23 +94,9 @@ export class HouseComponent implements OnInit {
     );
   }
 
-  public updateHouse(): void {
-    this.selectedHouse.district = this.selectedDistrict;
-    this.houseService.updateHouse(this.streeet, this.houseeNumber, this.selectedHouse).subscribe(
-      () => this.loadHouses(),
-      (error) => console.error(error)
-    );
-  }
-
-
   public onChangeSelectCriteria(selectedItem: string) {
     if (this.searchText != "") {
       this.findHouses(this.searchText)
     }
-  }
-
-  public onChangeSelectDistrict(selectedItem: any) {
-    this.selectedDistrict = new District(selectedItem.districtId, selectedItem.districtName);
-    this.isDistrictChanged = true;
   }
 }

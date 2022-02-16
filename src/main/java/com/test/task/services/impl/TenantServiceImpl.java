@@ -42,21 +42,6 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public Iterable<Tenant> getTenantsByDistrict(String districtName) {
-        return tenantRepo.findAllByDistrict(districtName);
-    }
-
-    @Override
-    public Iterable<Tenant> getTenantsByHouse(String street, int houseNumber) {
-        return tenantRepo.findByHouse(street, houseNumber);
-    }
-
-    @Override
-    public Iterable<Tenant> getTenantsByStreet(String street) {
-        return tenantRepo.findAllByStreet(street);
-    }
-
-    @Override
     public Iterable<Tenant> getTenantsByTelNum(String telNum) {
         return tenantRepo.findAllByTelNum(telNum);
     }
@@ -69,7 +54,7 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public Iterable<Tenant> findTenants(String telNum, String fio) {
         if (telNum != null)
-            return getTenantsByTelNum("+" + telNum.replace(" ", ""));
+            return getTenantsByTelNum(telNum.replace(" ", ""));
         else if (fio != null)
             return getTenantsByFio(fio);
         else return getTenants();
