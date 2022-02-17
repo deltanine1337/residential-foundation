@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import {DistrictComponent} from "./components/district/district.component";
 import {HouseComponent} from "./components/house/house.component";
 import {TenantComponent} from "./components/tenant/tenant.component";
+import {LoginComponent} from "./components/login/login.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 const routes: Routes = [
   { path: 'district', component: DistrictComponent },
   { path: 'house', component: HouseComponent },
   { path: 'tenant', component: TenantComponent },
-  { path: '**', component: DistrictComponent }
+  { path: "login", component: LoginComponent},
+  { path: "register", component: RegisterComponent},
+  { path: "**", redirectTo: 'login'}
 ];
 
 @NgModule({

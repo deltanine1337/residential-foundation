@@ -3,6 +3,7 @@ import {DistrictService} from "../../services/district.service";
 import {District} from "../../model/district";
 import {Router} from "@angular/router";
 import {DistrictModalComponent} from "../district-modal/district-modal.component";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-district',
@@ -14,6 +15,7 @@ export class DistrictComponent implements OnInit {
   @ViewChild(DistrictModalComponent)
   districtModalComponent: DistrictModalComponent;
   districts: District[] = [];
+  isAdmin = AppComponent.isAdmin;
 
   constructor(private districtService: DistrictService, private router: Router) {
   }

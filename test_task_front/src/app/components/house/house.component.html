@@ -15,7 +15,7 @@
           <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="findHouses(searchText)"/>
         </td>
         <td align="right">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHouseModal"
+          <button *ngIf="isAdmin" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addHouseModal"
                   (click)="onCreate()">
             ➕ Добавить
           </button>
@@ -34,8 +34,8 @@
         <th scope="col">Число подъездов</th>
         <th scope="col">Этажность</th>
         <th scope="col">Район</th>
-        <th scope="col" class="button-column"></th>
-        <th scope="col" class="button-column"></th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
       </tr>
       </thead>
       <tbody>
@@ -46,14 +46,14 @@
         <td id="col4">{{house?.numberOfEntraces}}</td>
         <td id="col5">{{house?.numberOfFloors}}</td>
         <td id="col6">{{house?.district?.districtName!}}</td>
-        <td id="col7">
+        <td *ngIf="isAdmin" id="col7">
           <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal"
                   data-bs-target="#addHouseModal"
                   (click)="onEdit(house)">
             ✏
           </button>
         </td>
-        <td id="col8">
+        <td *ngIf="isAdmin" id="col8">
           <button type="button" class="btn btn-danger change-btn"
                   (click)="deleteHouse(house?.houseId.street!, house?.houseId.houseNumber!)">
             🗑

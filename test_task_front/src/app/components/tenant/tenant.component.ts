@@ -6,6 +6,7 @@ import {ISearch} from "../../model/search";
 import {SEARCH_TENANT_CRITERIAS} from "../../consts/search.const";
 import {ESearchTenantCriteria} from "../../model/enums/search.enum";
 import {TenantModalComponent} from "../tenant-modal/tenant-modal.component";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-tenant',
@@ -20,6 +21,7 @@ export class TenantComponent implements OnInit {
   searchCriteria: ESearchTenantCriteria;
   criteria: ISearch[];
   searchText: string;
+  isAdmin = AppComponent.isAdmin;
 
   constructor(private houseService: HouseService, private tenantService: TenantService) {
   }

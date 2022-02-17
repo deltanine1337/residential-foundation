@@ -16,7 +16,8 @@
           <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="findTenants(searchText)"/>
         </td>
         <td align="right">
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTenantModal"
+          <button *ngIf="isAdmin" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  data-bs-target="#addTenantModal"
                   (click)="onCreate()">
             ➕ Добавить
           </button>
@@ -32,8 +33,8 @@
         <th scope="col">ФИО</th>
         <th scope="col">Номер телефона</th>
         <th scope="col">Адрес</th>
-        <th scope="col" class="button-column"></th>
-        <th scope="col" class="button-column"></th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
+        <th *ngIf="isAdmin" scope="col" class="button-column"></th>
       </tr>
       </thead>
       <tbody>
@@ -43,14 +44,14 @@
         <td id="col4">р. {{tenant?.house?.district?.districtName}}, ул. {{tenant?.house?.houseId.street}},
           д.{{tenant?.house?.houseId.houseNumber}}, кв.{{tenant?.apartmentNumber}}
         </td>
-        <td id="col5">
+        <td *ngIf="isAdmin" id="col5">
           <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal"
                   data-bs-target="#addTenantModal"
                   (click)="onEdit(tenant)">
             ✏
           </button>
         </td>
-        <td id="col6">
+        <td *ngIf="isAdmin" id="col6">
           <button type="button" class="btn btn-danger change-btn" (click)="deleteTenant(tenant.tenantId!)">
             🗑
           </button>

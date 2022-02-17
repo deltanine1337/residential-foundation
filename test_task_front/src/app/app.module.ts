@@ -13,6 +13,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { DistrictModalComponent } from './components/district-modal/district-modal.component';
 import { HouseModalComponent } from './components/house-modal/house-modal.component';
 import { TenantModalComponent } from './components/tenant-modal/tenant-modal.component';
+import {LoginComponent} from "./components/login/login.component";
+import {RegisterComponent} from "./components/register/register.component";
+import {authInterceptorProviders} from "./_helpers/auth.interceptor";
+import {TokenStorageService} from "./services/token-storage.service";
 
 
 
@@ -24,7 +28,9 @@ import { TenantModalComponent } from './components/tenant-modal/tenant-modal.com
     TenantComponent,
     DistrictModalComponent,
     HouseModalComponent,
-    TenantModalComponent
+    TenantModalComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     HttpClientModule,
@@ -33,7 +39,7 @@ import { TenantModalComponent } from './components/tenant-modal/tenant-modal.com
     BrowserModule,
     NgSelectModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders, TokenStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

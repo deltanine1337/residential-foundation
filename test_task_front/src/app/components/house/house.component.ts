@@ -7,6 +7,7 @@ import {SEARCH_HOUSE_CRITERIAS} from "../../consts/search.const";
 import {ISearch} from "../../model/search";
 import {ESearchHouseCriteria} from "../../model/enums/search.enum";
 import {HouseModalComponent} from "../house-modal/house-modal.component";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-house',
@@ -21,6 +22,7 @@ export class HouseComponent implements OnInit {
   searchCriteria: ESearchHouseCriteria;
   criteria: ISearch[];
   searchText: string;
+  isAdmin = AppComponent.isAdmin;
 
   constructor(private houseService: HouseService, private districtService: DistrictService) {
   }
