@@ -1,5 +1,5 @@
-<h2 style="margin-top: 15px;" align="center">Авторизация</h2>
-<div align="center" style="margin-top: 25px; margin-left: 40%; width: 20%; align-content: center">
+<h2 class="log-reg-header">Вход</h2>
+<div class="log-reg-form">
   <p align="center">Логин<input [(ngModel)]="form.username" name="username" type="text" class="form-control"
                                 id="username" #username="ngModel" required/></p>
   <div [hidden]="username.valid || username.untouched" class="alert alert-danger">

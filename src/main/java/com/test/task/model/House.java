@@ -1,6 +1,5 @@
 package com.test.task.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.test.task.model.keys.HouseId;
 import lombok.Data;
 
@@ -22,7 +21,6 @@ public class House {
     @ManyToOne
     @JoinColumn(name = "district_id")
     private District district;
-    @JsonIgnore
     @OneToMany(mappedBy = "house", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Collection<Tenant> tenants;
 }

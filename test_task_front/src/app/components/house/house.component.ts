@@ -17,7 +17,7 @@ import {AppComponent} from "../../app.component";
 })
 export class HouseComponent implements OnInit {
   @ViewChild(HouseModalComponent)
-  houseModalComponent: HouseModalComponent;
+  houseModalComponent: HouseModalComponent = new HouseModalComponent(this.houseService);
   houses: House[] = [];
   searchCriteria: ESearchHouseCriteria;
   criteria: ISearch[];
@@ -72,7 +72,7 @@ export class HouseComponent implements OnInit {
   public onCreate(): void {
     this.houseModalComponent.isUpdate = false;
     this.houseModalComponent.selectedHouse = new House(null, null, null, null, new District(0, ''));
-    if (this.houseModalComponent.selectedHouse.district.districtId == 0) {
+    if (this.houseModalComponent.selectedHouse.districtDto.districtId == 0) {
       this.houseModalComponent.isDistrictChanged = false;
     }
     this.houseModalComponent.streeet = "";
@@ -85,7 +85,7 @@ export class HouseComponent implements OnInit {
     this.houseModalComponent.selectedHouse = JSON.parse(JSON.stringify(house));
     this.houseModalComponent.streeet = this.houseModalComponent.selectedHouse.houseId.street;
     this.houseModalComponent.houseeNumber = this.houseModalComponent.selectedHouse.houseId.houseNumber;
-    this.houseModalComponent.selectedDistrict = this.houseModalComponent.selectedHouse.district;
+    this.houseModalComponent.selectedDistrict = this.houseModalComponent.selectedHouse.districtDto;
     this.houseModalComponent.isDistrictChanged = true;
   }
 

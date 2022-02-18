@@ -39,7 +39,7 @@
             <ng-select [searchable]="false" [hideSelected]="true" placeholder="Выберите дом"
                        (change)="onChangeSelectHouse($event)">
               <ng-option *ngFor="let house of houses" [value]="house">
-                р. {{house?.district?.districtName}}, ул. {{house?.houseId!.street}}, д. {{house?.houseId!.houseNumber}}
+                р. {{house?.districtDto?.districtName}}, ул. {{house?.houseId!.street}}, д. {{house?.houseId!.houseNumber}}
               </ng-option>
             </ng-select>
           </div>

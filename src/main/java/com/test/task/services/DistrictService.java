@@ -1,11 +1,12 @@
 package com.test.task.services;
 
+import com.test.task.dto.DistrictDto;
 import com.test.task.model.District;
 import org.springframework.http.ResponseEntity;
 
 public interface DistrictService {
-    Iterable<District> getDistricts();
-    District addDistrict(District district);
+    Iterable<DistrictDto> getDistricts();
+    DistrictDto addDistrict(DistrictDto districtDto);
     void deleteDistrict(Long id);
-    District updateDistrict(Long id, District district);
+    DistrictDto updateDistrict(Long id, DistrictDto districtDto);
 }

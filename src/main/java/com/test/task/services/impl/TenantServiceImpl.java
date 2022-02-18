@@ -1,29 +1,34 @@
 package com.test.task.services.impl;
 
-import com.test.task.model.Tenant;
+import com.test.task.dto.TenantDto;
+import com.test.task.mappers.impl.TenantMapperImpl;
 import com.test.task.repos.TenantRepo;
 import com.test.task.services.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TenantServiceImpl implements TenantService {
 
     private final TenantRepo tenantRepo;
+    private final TenantMapperImpl tenantMapper;
 
     @Override
-    public Iterable<Tenant> getTenants() {
-        return tenantRepo.findAll();
+    public Iterable<TenantDto> getTenants() {
+        return tenantRepo.findAll().stream()
+                .map(tenantMapper::toTenantDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Tenant addTenant(Tenant tenant) {
-        tenantRepo.insert(tenant.getApartmentNumber(), tenant.getFio(), tenant.getTelNum(),
-                tenant.getHouse().getHouseId().getHouseNumber(), tenant.getHouse().getHouseId().getStreet());
-        return tenant;
+    public TenantDto addTenant(TenantDto tenantDto) {
+        tenantRepo.insert(tenantDto.getApartmentNumber(), tenantDto.getFio(), tenantDto.getTelNum(),
+                tenantDto.getHouseDto().getHouseId().getHouseNumber(), tenantDto.getHouseDto().getHouseId().getStreet());
+        return tenantDto;
     }
 
     @Override
@@ -33,26 +38,31 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public Tenant updateTenant(Long id, Tenant tenant) {
-        Tenant foundTenant = tenantRepo.findByTenantId(id);
-        tenant.setTenantId(foundTenant.getTenantId());
-        tenantRepo.update(tenant.getApartmentNumber(), tenant.getFio(), tenant.getTelNum(),
-                tenant.getHouse().getHouseId().getHouseNumber(), tenant.getHouse().getHouseId().getStreet(), tenant.getTenantId());
-        return tenant;
+    public TenantDto updateTenant(Long id, TenantDto tenantDto) {
+        TenantDto foundTenant = tenantMapper.toTenantDto(tenantRepo.findByTenantId(id));
+        tenantDto.setTenantId(foundTenant.getTenantId());
+        tenantRepo.update(tenantDto.getApartmentNumber(), tenantDto.getFio(), tenantDto.getTelNum(),
+                tenantDto.getHouseDto().getHouseId().getHouseNumber(), tenantDto.getHouseDto().getHouseId().getStreet(),
+                tenantDto.getTenantId());
+        return tenantDto;
     }
 
     @Override
-    public Iterable<Tenant> getTenantsByTelNum(String telNum) {
-        return tenantRepo.findAllByTelNum(telNum);
+    public Iterable<TenantDto> getTenantsByTelNum(String telNum) {
+        return tenantRepo.findAllByTelNum(telNum).stream()
+                .map(tenantMapper::toTenantDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Iterable<Tenant> getTenantsByFio(String fio) {
-        return tenantRepo.findByFio(fio.toLowerCase());
+    public Iterable<TenantDto> getTenantsByFio(String fio) {
+        return tenantRepo.findByFio(fio.toLowerCase()).stream()
+                .map(tenantMapper::toTenantDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Iterable<Tenant> findTenants(String telNum, String fio) {
+    public Iterable<TenantDto> findTenants(String telNum, String fio) {
         if (telNum != null)
             return getTenantsByTelNum(telNum.replace(" ", ""));
         else if (fio != null)

@@ -16,7 +16,7 @@ import {AppComponent} from "../../app.component";
 })
 export class TenantComponent implements OnInit {
   @ViewChild(TenantModalComponent)
-  tenantModalComponent: TenantModalComponent;
+  tenantModalComponent: TenantModalComponent = new TenantModalComponent(this.tenantService);
   tenants: Tenant[] = [];
   searchCriteria: ESearchTenantCriteria;
   criteria: ISearch[];
@@ -80,7 +80,7 @@ export class TenantComponent implements OnInit {
   public onEdit(tenant: Tenant): void {
     this.tenantModalComponent.isUpdate = true;
     this.tenantModalComponent.selectedTenant = JSON.parse(JSON.stringify(tenant));
-    this.tenantModalComponent.selectedHouse = this.tenantModalComponent.selectedTenant.house;
+    this.tenantModalComponent.selectedHouse = this.tenantModalComponent.selectedTenant.houseDto;
   }
 
   public deleteTenant(id: number): void {

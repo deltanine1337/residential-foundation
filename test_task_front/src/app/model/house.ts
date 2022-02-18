@@ -5,7 +5,7 @@ export class House {
   numberOfApartments: number;
   numberOfFloors: number;
   numberOfEntraces: number;
-  district: District
+  districtDto: District;
 
   constructor(houseId: any, numberOfApartments: number, numberOfFloors: number, numberOfEntraces: number,
               district: District){
@@ -13,6 +13,6 @@ export class House {
     this.numberOfApartments = numberOfApartments;
     this.numberOfFloors = numberOfFloors;
     this.numberOfEntraces = numberOfEntraces;
-    this.district = district;
+    this.districtDto = district;
   }
 }

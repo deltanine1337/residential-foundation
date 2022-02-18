@@ -30,7 +30,7 @@ export class HouseModalComponent implements OnInit {
       'street': this.streeet,
       'houseNumber': this.houseeNumber
     };
-    this.selectedHouse.district = this.selectedDistrict;
+    this.selectedHouse.districtDto = this.selectedDistrict;
     this.houseService.addHouse(this.selectedHouse).subscribe(
       () => this.emitLoadHouses.emit(),
       (error) => console.error(error)
@@ -38,7 +38,7 @@ export class HouseModalComponent implements OnInit {
   }
 
   public updateHouse(): void {
-    this.selectedHouse.district = this.selectedDistrict;
+    this.selectedHouse.districtDto = this.selectedDistrict;
     this.houseService.updateHouse(this.streeet, this.houseeNumber, this.selectedHouse).subscribe(
       () => this.emitLoadHouses.emit(),
       (error) => console.error(error)

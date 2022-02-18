@@ -1,9 +1,8 @@
 package com.test.task.controllers;
 
-import com.test.task.model.Tenant;
+import com.test.task.dto.TenantDto;
 import com.test.task.services.TenantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,15 +16,15 @@ public class TenantController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<Tenant> getTenants(@RequestParam(required = false) String telNum,
-                                       @RequestParam(required = false) String fio){
+    public Iterable<TenantDto> getTenants(@RequestParam(required = false) String telNum,
+                                          @RequestParam(required = false) String fio){
         return tenantService.findTenants(telNum, fio);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public Tenant addTenant(@RequestBody Tenant tenant){
-        return tenantService.addTenant(tenant);
+    public TenantDto addTenant(@RequestBody TenantDto tenantDto){
+        return tenantService.addTenant(tenantDto);
     }
 
     @DeleteMapping("/{id}")
@@ -36,7 +35,7 @@ public class TenantController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Tenant updateTenant(@PathVariable("id") Long id, @RequestBody Tenant tenant){
-        return tenantService.updateTenant(id, tenant);
+    public TenantDto updateTenant(@PathVariable("id") Long id, @RequestBody TenantDto tenantDto){
+        return tenantService.updateTenant(id, tenantDto);
     }
 }

@@ -26,7 +26,7 @@ export class TenantModalComponent implements OnInit {
   }
 
   public addTenant(): void {
-    this.selectedTenant.house = this.selectedHouse;
+    this.selectedTenant.houseDto = this.selectedHouse;
     this.tenantService.addTenant(this.selectedTenant).subscribe(
       () => this.emitLoadTenants.emit(),
       (error) => console.error(error)
@@ -34,7 +34,7 @@ export class TenantModalComponent implements OnInit {
   }
 
   public updateTenant(): void {
-    this.selectedTenant.house = this.selectedHouse;
+    this.selectedTenant.houseDto = this.selectedHouse;
     this.tenantService.updateTenant(this.selectedTenant.tenantId, this.selectedTenant).subscribe(
       () => this.emitLoadTenants.emit(),
       (error) => console.error(error)

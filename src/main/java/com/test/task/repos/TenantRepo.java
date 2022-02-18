@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 public interface TenantRepo extends JpaRepository<Tenant, Long> {
     @Modifying
@@ -25,10 +26,10 @@ public interface TenantRepo extends JpaRepository<Tenant, Long> {
                 @Param("street") String street, @Param("id") Long id);
 
     @Query(value = "select * from tenant where lower(fio) like %:fio%", nativeQuery = true)
-    Iterable<Tenant> findByFio(@Param("fio") String fio);
+    List<Tenant> findByFio(@Param("fio") String fio);
 
     @Query(value = "select * from tenant where tel_num like %:telNum%", nativeQuery = true)
-    Iterable<Tenant> findAllByTelNum(@Param("telNum") String telNum);
+    List<Tenant> findAllByTelNum(@Param("telNum") String telNum);
 
     Tenant findByTenantId(Long id);
 }

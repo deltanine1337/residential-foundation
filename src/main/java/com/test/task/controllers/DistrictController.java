@@ -1,9 +1,8 @@
 package com.test.task.controllers;
 
-import com.test.task.model.District;
+import com.test.task.dto.DistrictDto;
 import com.test.task.services.DistrictService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,14 +18,14 @@ public class DistrictController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<District> getDistricts() {
+    public Iterable<DistrictDto> getDistricts() {
         return districtService.getDistricts();
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public District addDistrict(@RequestBody District district) {
-        return districtService.addDistrict(district);
+    public DistrictDto addDistrict(@RequestBody DistrictDto districtDto) {
+        return districtService.addDistrict(districtDto);
     }
 
     @DeleteMapping("/{id}")
@@ -37,8 +36,7 @@ public class DistrictController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public District updateDistrict(@PathVariable("id") Long id, @RequestBody District district) {
-        return districtService.updateDistrict(id, district);
+    public DistrictDto updateDistrict(@PathVariable("id") Long id, @RequestBody DistrictDto districtDto) {
+        return districtService.updateDistrict(id, districtDto);
     }
-
 }

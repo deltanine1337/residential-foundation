@@ -1,10 +1,9 @@
 package com.test.task.controllers;
 
-import com.test.task.model.House;
+import com.test.task.dto.HouseDto;
 import com.test.task.model.keys.HouseId;
 import com.test.task.services.HouseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,15 +19,15 @@ public class HouseController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<House> getHouses(@RequestParam(required = false) String district,
-                                     @RequestParam(required = false) String street) {
+    public Iterable<HouseDto> getHouses(@RequestParam(required = false) String district,
+                                        @RequestParam(required = false) String street) {
         return houseService.findHouses(district, street);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public House addHouse(@RequestBody House house) {
-        return houseService.addHouse(house);
+    public HouseDto addHouse(@RequestBody HouseDto houseDto) {
+        return houseService.addHouse(houseDto);
     }
 
     @DeleteMapping("/{street}/{houseNumber}")
@@ -39,10 +38,10 @@ public class HouseController {
 
     @PutMapping("/{street}/{houseNumber}")
     @PreAuthorize("hasRole('ADMIN')")
-    public House updateHouse(@PathVariable("street") String street,
+    public HouseDto updateHouse(@PathVariable("street") String street,
                              @PathVariable("houseNumber") int houseNumber,
-                             @RequestBody House house) {
-        return houseService.updateHouse(new HouseId(street, houseNumber), house);
+                             @RequestBody HouseDto houseDto) {
+        return houseService.updateHouse(new HouseId(street, houseNumber), houseDto);
     }
 
 }

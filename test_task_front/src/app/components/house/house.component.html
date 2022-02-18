@@ -45,7 +45,7 @@
         <td id="col3">{{house?.numberOfApartments}}</td>
         <td id="col4">{{house?.numberOfEntraces}}</td>
         <td id="col5">{{house?.numberOfFloors}}</td>
-        <td id="col6">{{house?.district?.districtName!}}</td>
+        <td id="col6">{{house?.districtDto?.districtName!}}</td>
         <td *ngIf="isAdmin" id="col7">
           <button type="button" class="btn btn-warning button-center change-btn" data-bs-toggle="modal"
                   data-bs-target="#addHouseModal"

@@ -1,16 +1,13 @@
 package com.test.task.services;
 
-import com.test.task.model.District;
-import com.test.task.model.House;
-import com.test.task.model.Tenant;
-import org.springframework.http.ResponseEntity;
+import com.test.task.dto.TenantDto;
 
 public interface TenantService {
-    Iterable<Tenant> getTenants();
-    Tenant addTenant(Tenant tenant);
+    Iterable<TenantDto> getTenants();
+    TenantDto addTenant(TenantDto tenantDto);
     void deleteTenant(Long id);
-    Tenant updateTenant(Long id, Tenant tenant);
-    Iterable<Tenant> getTenantsByTelNum(String telNum);
-    Iterable<Tenant> getTenantsByFio(String fio);
-    Iterable<Tenant> findTenants(String telNum, String fio);
+    TenantDto updateTenant(Long id, TenantDto tenantDto);
+    Iterable<TenantDto> getTenantsByTelNum(String telNum);
+    Iterable<TenantDto> getTenantsByFio(String fio);
+    Iterable<TenantDto> findTenants(String telNum, String fio);
 }
