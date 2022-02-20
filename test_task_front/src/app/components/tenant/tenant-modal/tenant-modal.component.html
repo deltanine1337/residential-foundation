@@ -37,12 +37,13 @@
           <div class="form-group">
             <label>Дом:</label>
             <ng-select [searchable]="false" [hideSelected]="true" placeholder="Выберите дом" [clearable]="false"
-                       (change)="onChangeSelectHouse($event)">
+                       (change)="onChangeSelectHouse($event)" [(ngModel)]="selectedHouse">
               <ng-option *ngFor="let house of houses" [value]="house">
-                р. {{house?.districtDto?.districtName}}, ул. {{house?.houseId!.street}}, д. {{house?.houseId!.houseNumber}}
+                р. {{house?.districtDto?.districtName}}, ул. {{house?.houseId.street}}, д. {{house?.houseId.houseNumber}}
               </ng-option>
             </ng-select>
           </div>
+
         </form>
       </div>
 

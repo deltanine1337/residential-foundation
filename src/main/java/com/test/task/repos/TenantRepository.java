@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface TenantRepo extends JpaRepository<Tenant, Long> {
+public interface TenantRepository extends JpaRepository<Tenant, Long> {
     @Modifying
     @Transactional
     @Query(value = "insert into tenant(apartment_number,fio,tel_num,house_number, street) " +

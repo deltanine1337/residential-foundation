@@ -1,7 +1,7 @@
 import {District} from "./district";
 
 export class House {
-  houseId! : any;
+  houseId: any;
   numberOfApartments: number;
   numberOfFloors: number;
   numberOfEntraces: number;
