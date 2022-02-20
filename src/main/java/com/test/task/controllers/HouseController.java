@@ -1,6 +1,6 @@
 package com.test.task.controllers;
 
-import com.test.task.model.dto.HouseDto;
+import com.test.task.model.dto.HouseDTO;
 import com.test.task.model.jpa.keys.HouseId;
 import com.test.task.services.HouseService;
 import lombok.RequiredArgsConstructor;
@@ -17,14 +17,14 @@ public class HouseController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<HouseDto> getHouses(@RequestParam(required = false) String district,
+    public Iterable<HouseDTO> getHouses(@RequestParam(required = false) String district,
                                         @RequestParam(required = false) String street) {
         return houseService.findHouses(district, street);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public HouseDto addHouse(@RequestBody HouseDto houseDto) {
+    public HouseDTO addHouse(@RequestBody HouseDTO houseDto) {
         return houseService.addHouse(houseDto);
     }
 
@@ -36,9 +36,9 @@ public class HouseController {
 
     @PutMapping("/{street}/{houseNumber}")
     @PreAuthorize("hasRole('ADMIN')")
-    public HouseDto updateHouse(@PathVariable("street") String street,
-                             @PathVariable("houseNumber") int houseNumber,
-                             @RequestBody HouseDto houseDto) {
+    public HouseDTO updateHouse(@PathVariable("street") String street,
+                                @PathVariable("houseNumber") int houseNumber,
+                                @RequestBody HouseDTO houseDto) {
         return houseService.updateHouse(new HouseId(street, houseNumber), houseDto);
     }
 

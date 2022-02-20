@@ -1,6 +1,6 @@
 package com.test.task.mappers.impl;
 
-import com.test.task.model.dto.TenantDto;
+import com.test.task.model.dto.TenantDTO;
 import com.test.task.mappers.TenantMapper;
 import com.test.task.model.jpa.Tenant;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ public class TenantMapperImpl implements TenantMapper {
     private final HouseMapperImpl houseMapper;
 
     @Override
-    public TenantDto toTenantDto(Tenant tenant) {
-        TenantDto tenantDto = new TenantDto();
+    public TenantDTO toTenantDto(Tenant tenant) {
+        TenantDTO tenantDto = new TenantDTO();
         tenantDto.setTenantId(tenant.getTenantId());
         tenantDto.setApartmentNumber(tenant.getApartmentNumber());
         tenantDto.setFio(tenant.getFio());
@@ -24,7 +24,7 @@ public class TenantMapperImpl implements TenantMapper {
     }
 
     @Override
-    public Tenant toTenant(TenantDto tenantDto) {
+    public Tenant toTenant(TenantDTO tenantDto) {
         Tenant tenant = new Tenant();
         tenant.setTenantId(tenantDto.getTenantId());
         tenant.setApartmentNumber(tenantDto.getApartmentNumber());

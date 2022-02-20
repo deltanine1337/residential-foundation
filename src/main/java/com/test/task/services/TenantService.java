@@ -1,13 +1,13 @@
 package com.test.task.services;
 
-import com.test.task.model.dto.TenantDto;
+import com.test.task.model.dto.TenantDTO;
 
 public interface TenantService {
-    Iterable<TenantDto> getTenants();
-    TenantDto addTenant(TenantDto tenantDto);
+    Iterable<TenantDTO> getTenants();
+    TenantDTO addTenant(TenantDTO tenantDto);
     void deleteTenant(Long id);
-    TenantDto updateTenant(Long id, TenantDto tenantDto);
-    Iterable<TenantDto> getTenantsByTelNum(String telNum);
-    Iterable<TenantDto> getTenantsByFio(String fio);
-    Iterable<TenantDto> findTenants(String telNum, String fio);
+    TenantDTO updateTenant(Long id, TenantDTO tenantDto);
+    Iterable<TenantDTO> getTenantsByTelNum(String telNum);
+    Iterable<TenantDTO> getTenantsByFio(String fio);
+    Iterable<TenantDTO> findTenants(String telNum, String fio);
 }

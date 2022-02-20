@@ -17,28 +17,21 @@ import {AppComponent} from "../../app.component";
 })
 export class HouseComponent implements OnInit {
   @ViewChild(HouseModalComponent)
-  houseModalComponent: HouseModalComponent = new HouseModalComponent(this.houseService);
+  houseModalComponent: HouseModalComponent;
   houses: House[] = [];
   searchCriteria: ESearchHouseCriteria;
   criteria: ISearch[];
   searchText: string;
   isAdmin = AppComponent.isAdmin;
+  isShowModal = true;
 
   constructor(private houseService: HouseService, private districtService: DistrictService) {
   }
 
   ngOnInit(): void {
     this.loadHouses();
-    this.loadDistricts();
     this.criteria = SEARCH_HOUSE_CRITERIAS;
     this.houseModalComponent.isDistrictChanged = false;
-  }
-
-  public loadDistricts(): void {
-    this.districtService.getDistricts().subscribe(
-      (items) => this.houseModalComponent.districts = items,
-      (error) => console.error(error)
-    );
   }
 
   public loadHouses(): void {
@@ -70,6 +63,7 @@ export class HouseComponent implements OnInit {
   }
 
   public onCreate(): void {
+    this.isShowModal = true;
     this.houseModalComponent.isUpdate = false;
     this.houseModalComponent.selectedHouse = new House(null, null, null, null, new District(0, ''));
     if (this.houseModalComponent.selectedHouse.districtDto.districtId == 0) {
@@ -81,6 +75,7 @@ export class HouseComponent implements OnInit {
   }
 
   public onEdit(house: House): void {
+    this.isShowModal = true;
     this.houseModalComponent.isUpdate = true;
     this.houseModalComponent.selectedHouse = JSON.parse(JSON.stringify(house));
     this.houseModalComponent.streeet = this.houseModalComponent.selectedHouse.houseId.street;
@@ -100,5 +95,10 @@ export class HouseComponent implements OnInit {
     if (this.searchText != "") {
       this.findHouses(this.searchText)
     }
+  }
+
+  public onCloseModal() {
+    this.isShowModal = false;
+    setTimeout(() => this.isShowModal = true, 5)
   }
 }

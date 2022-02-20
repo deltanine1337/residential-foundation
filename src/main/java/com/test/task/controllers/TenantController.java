@@ -1,6 +1,6 @@
 package com.test.task.controllers;
 
-import com.test.task.model.dto.TenantDto;
+import com.test.task.model.dto.TenantDTO;
 import com.test.task.services.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,14 +16,14 @@ public class TenantController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<TenantDto> getTenants(@RequestParam(required = false) String telNum,
+    public Iterable<TenantDTO> getTenants(@RequestParam(required = false) String telNum,
                                           @RequestParam(required = false) String fio){
         return tenantService.findTenants(telNum, fio);
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public TenantDto addTenant(@RequestBody TenantDto tenantDto){
+    public TenantDTO addTenant(@RequestBody TenantDTO tenantDto){
         return tenantService.addTenant(tenantDto);
     }
 
@@ -35,7 +35,7 @@ public class TenantController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public TenantDto updateTenant(@PathVariable("id") Long id, @RequestBody TenantDto tenantDto){
+    public TenantDTO updateTenant(@PathVariable("id") Long id, @RequestBody TenantDTO tenantDto){
         return tenantService.updateTenant(id, tenantDto);
     }
 }

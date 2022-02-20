@@ -9,8 +9,8 @@ import {Router} from "@angular/router";
   styleUrls: ['./district-modal.component.scss']
 })
 export class DistrictModalComponent implements OnInit {
-  @Output()
-  emitLoadDistricts: EventEmitter<any> = new EventEmitter<any>();
+  @Output() emitLoadDistricts: EventEmitter<any> = new EventEmitter<any>();
+  @Output() emitCloseModal: EventEmitter<any> = new EventEmitter<any>();
 
   isUpdate: boolean;
   selectedDistrict = new District(0, '');
@@ -33,5 +33,9 @@ export class DistrictModalComponent implements OnInit {
       () => this.emitLoadDistricts.emit(),
       (error) => console.error(error)
     );
+  }
+
+  public onClose() {
+    this.emitCloseModal.emit();
   }
 }

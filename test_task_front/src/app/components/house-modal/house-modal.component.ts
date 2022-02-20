@@ -10,8 +10,8 @@ import {District} from "../../model/district";
   styleUrls: ['./house-modal.component.scss']
 })
 export class HouseModalComponent implements OnInit {
-  @Output()
-  emitLoadHouses: EventEmitter<any> = new EventEmitter<any>();
+  @Output() emitCloseModal: EventEmitter<any> = new EventEmitter<any>();
+  @Output() emitLoadHouses: EventEmitter<any> = new EventEmitter<any>();
   isUpdate: boolean;
   selectedHouse = new House(null, 0, 0, 0, new District(0, ''));
   selectedDistrict = new District(0, '');
@@ -20,9 +20,17 @@ export class HouseModalComponent implements OnInit {
   isDistrictChanged: boolean;
   districts: District[] = [];
 
-  constructor(private houseService: HouseService) { }
+  constructor(private houseService: HouseService, private districtService: DistrictService) { }
 
   ngOnInit(): void {
+    this.loadDistricts();
+  }
+
+  public loadDistricts(): void {
+    this.districtService.getDistricts().subscribe(
+      (items) => this.districts = items,
+      (error) => console.error(error)
+    );
   }
 
   public addHouse(): void {
@@ -49,5 +57,9 @@ export class HouseModalComponent implements OnInit {
   public onChangeSelectDistrict(selectedItem: any) {
     this.selectedDistrict = new District(selectedItem.districtId, selectedItem.districtName);
     this.isDistrictChanged = true;
+  }
+
+  public onClose() {
+    this.emitCloseModal.emit();
   }
 }

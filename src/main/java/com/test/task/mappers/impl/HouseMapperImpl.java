@@ -1,6 +1,6 @@
 package com.test.task.mappers.impl;
 
-import com.test.task.model.dto.HouseDto;
+import com.test.task.model.dto.HouseDTO;
 import com.test.task.mappers.HouseMapper;
 import com.test.task.model.jpa.House;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +13,8 @@ public class HouseMapperImpl implements HouseMapper {
     private final DistrictMapperImpl districtMapper;
 
     @Override
-    public HouseDto toHouseDto(House house) {
-        HouseDto houseDto = new HouseDto();
+    public HouseDTO toHouseDto(House house) {
+        HouseDTO houseDto = new HouseDTO();
         houseDto.setHouseId(house.getHouseId());
         houseDto.setNumberOfApartments(house.getNumberOfApartments());
         houseDto.setNumberOfEntraces(house.getNumberOfEntraces());
@@ -24,7 +24,7 @@ public class HouseMapperImpl implements HouseMapper {
     }
 
     @Override
-    public House toHouse(HouseDto houseDto) {
+    public House toHouse(HouseDTO houseDto) {
         House house = new House();
         house.setHouseId(houseDto.getHouseId());
         house.setNumberOfApartments(houseDto.getNumberOfApartments());

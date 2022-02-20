@@ -4,10 +4,10 @@ import com.test.task.model.jpa.keys.HouseId;
 import lombok.Data;
 
 @Data
-public class HouseDto {
+public class HouseDTO {
     private HouseId houseId;
     private int numberOfApartments;
     private int numberOfFloors;
     private int numberOfEntraces;
-    private DistrictDto districtDto;
+    private DistrictDTO districtDto;
 }

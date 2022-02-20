@@ -1,10 +1,10 @@
 package com.test.task.services;
 
-import com.test.task.model.dto.DistrictDto;
+import com.test.task.model.dto.DistrictDTO;
 
 public interface DistrictService {
-    Iterable<DistrictDto> getDistricts();
-    DistrictDto addDistrict(DistrictDto districtDto);
+    Iterable<DistrictDTO> getDistricts();
+    DistrictDTO addDistrict(DistrictDTO districtDto);
     void deleteDistrict(Long id);
-    DistrictDto updateDistrict(Long id, DistrictDto districtDto);
+    DistrictDTO updateDistrict(Long id, DistrictDTO districtDto);
 }

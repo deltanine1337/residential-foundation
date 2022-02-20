@@ -16,6 +16,7 @@ export class DistrictComponent implements OnInit {
   districtModalComponent: DistrictModalComponent;
   districts: District[] = [];
   isAdmin = AppComponent.isAdmin;
+  isShowModal = true;
 
   constructor(private districtService: DistrictService, private router: Router) {
   }
@@ -46,5 +47,10 @@ export class DistrictComponent implements OnInit {
       () => this.loadDistricts(),
       (error) => console.error(error)
     );
+  }
+
+  public onCloseModal() {
+    this.isShowModal = false;
+    setTimeout(() => this.isShowModal = true, 5)
   }
 }

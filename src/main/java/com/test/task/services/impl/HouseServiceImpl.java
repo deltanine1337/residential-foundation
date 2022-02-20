@@ -1,6 +1,6 @@
 package com.test.task.services.impl;
 
-import com.test.task.model.dto.HouseDto;
+import com.test.task.model.dto.HouseDTO;
 import com.test.task.mappers.impl.HouseMapperImpl;
 import com.test.task.model.jpa.keys.HouseId;
 import com.test.task.repos.HouseRepo;
@@ -19,14 +19,14 @@ public class HouseServiceImpl implements HouseService {
     private final HouseMapperImpl houseMapper;
 
     @Override
-    public Iterable<HouseDto> getHouses() {
+    public Iterable<HouseDTO> getHouses() {
         return houseRepo.findAll().stream()
                 .map(houseMapper::toHouseDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public HouseDto addHouse(HouseDto houseDto) {
+    public HouseDTO addHouse(HouseDTO houseDto) {
         houseRepo.save(houseMapper.toHouse(houseDto));
         return houseDto;
     }
@@ -38,29 +38,29 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public HouseDto updateHouse(HouseId houseId, HouseDto houseDto) {
-        HouseDto foundHouse = houseMapper.toHouseDto(houseRepo.findByHouseId(houseId));
+    public HouseDTO updateHouse(HouseId houseId, HouseDTO houseDto) {
+        HouseDTO foundHouse = houseMapper.toHouseDto(houseRepo.findByHouseId(houseId));
         houseDto.setHouseId(foundHouse.getHouseId());
         houseRepo.save(houseMapper.toHouse(houseDto));
         return houseDto;
     }
 
     @Override
-    public Iterable<HouseDto> getHousesByDistrict(String district) {
+    public Iterable<HouseDTO> getHousesByDistrict(String district) {
         return houseRepo.findByDistrict(district.toLowerCase()).stream()
                 .map(houseMapper::toHouseDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Iterable<HouseDto> getHousesByStreet(String street) {
+    public Iterable<HouseDTO> getHousesByStreet(String street) {
         return houseRepo.findAllByStreet(street.toLowerCase()).stream()
                 .map(houseMapper::toHouseDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Iterable<HouseDto> findHouses(String district, String street){
+    public Iterable<HouseDTO> findHouses(String district, String street){
         if (district != null && street == null)
             return getHousesByDistrict(district);
         else if (district == null && street != null)

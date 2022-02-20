@@ -1,6 +1,6 @@
 package com.test.task.controllers;
 
-import com.test.task.model.dto.DistrictDto;
+import com.test.task.model.dto.DistrictDTO;
 import com.test.task.services.DistrictService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,13 +16,13 @@ public class DistrictController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<DistrictDto> getDistricts() {
+    public Iterable<DistrictDTO> getDistricts() {
         return districtService.getDistricts();
     }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public DistrictDto addDistrict(@RequestBody DistrictDto districtDto) {
+    public DistrictDTO addDistrict(@RequestBody DistrictDTO districtDto) {
         return districtService.addDistrict(districtDto);
     }
 
@@ -34,7 +34,7 @@ public class DistrictController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public DistrictDto updateDistrict(@PathVariable("id") Long id, @RequestBody DistrictDto districtDto) {
+    public DistrictDTO updateDistrict(@PathVariable("id") Long id, @RequestBody DistrictDTO districtDto) {
         return districtService.updateDistrict(id, districtDto);
     }
 }

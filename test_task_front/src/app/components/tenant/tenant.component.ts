@@ -16,19 +16,19 @@ import {AppComponent} from "../../app.component";
 })
 export class TenantComponent implements OnInit {
   @ViewChild(TenantModalComponent)
-  tenantModalComponent: TenantModalComponent = new TenantModalComponent(this.tenantService);
+  tenantModalComponent: TenantModalComponent;
   tenants: Tenant[] = [];
   searchCriteria: ESearchTenantCriteria;
   criteria: ISearch[];
   searchText: string;
   isAdmin = AppComponent.isAdmin;
+  isShowModal = true;
 
   constructor(private houseService: HouseService, private tenantService: TenantService) {
   }
 
   ngOnInit(): void {
     this.loadTenants();
-    this.loadHouses();
     this.criteria = SEARCH_TENANT_CRITERIAS;
     this.tenantModalComponent.isHouseChanged = false;
   }
@@ -39,13 +39,6 @@ export class TenantComponent implements OnInit {
       (error) => console.error(error)
     );
     this.searchText = "";
-  }
-
-  public loadHouses(){
-    this.houseService.getHouses().subscribe(
-      (items) => this.tenantModalComponent.houses = items,
-      (error) => console.error(error)
-    );
   }
 
   public findTenants(input: string): void {
@@ -94,5 +87,10 @@ export class TenantComponent implements OnInit {
     if (this.searchText != "") {
       this.findTenants(this.searchText)
     }
+  }
+
+  public onCloseModal() {
+    this.isShowModal = false;
+    setTimeout(() => this.isShowModal = true, 5)
   }
 }

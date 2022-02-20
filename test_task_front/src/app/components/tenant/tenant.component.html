@@ -61,4 +61,4 @@
     </table>
   </div>
 </div>
-<app-tenant-modal (emitLoadTenants)="loadTenants()"></app-tenant-modal>
+<app-tenant-modal *ngIf="isShowModal" (emitLoadTenants)="loadTenants()" (emitCloseModal)="onCloseModal()"></app-tenant-modal>
