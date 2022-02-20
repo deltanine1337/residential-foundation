@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/tenant")
@@ -16,8 +18,8 @@ public class TenantController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<TenantDTO> getTenants(@RequestParam(required = false) String telNum,
-                                          @RequestParam(required = false) String fio){
+    public List<TenantDTO> getTenants(@RequestParam(required = false) String telNum,
+                                      @RequestParam(required = false) String fio){
         return tenantService.findTenants(telNum, fio);
     }
 

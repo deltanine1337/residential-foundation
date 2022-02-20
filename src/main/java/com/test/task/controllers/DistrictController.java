@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/district")
@@ -16,7 +18,7 @@ public class DistrictController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<DistrictDTO> getDistricts() {
+    public List<DistrictDTO> getDistricts() {
         return districtService.getDistricts();
     }
 

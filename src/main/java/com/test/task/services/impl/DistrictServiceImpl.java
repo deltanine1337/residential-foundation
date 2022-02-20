@@ -2,12 +2,14 @@ package com.test.task.services.impl;
 
 import com.test.task.model.dto.DistrictDTO;
 import com.test.task.mappers.impl.DistrictMapperImpl;
+import com.test.task.model.jpa.District;
 import com.test.task.repos.DistrictRepo;
 import com.test.task.services.DistrictService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,7 +20,7 @@ public class DistrictServiceImpl implements DistrictService {
     private final DistrictMapperImpl districtMapper;
 
     @Override
-    public Iterable<DistrictDTO> getDistricts() {
+    public List<DistrictDTO> getDistricts() {
         return districtRepo.findAll().stream()
                 .map(districtMapper::toDistrictDto)
                 .collect(Collectors.toList());
@@ -26,8 +28,8 @@ public class DistrictServiceImpl implements DistrictService {
 
     @Override
     public DistrictDTO addDistrict(DistrictDTO districtDto) {
-        districtRepo.save(districtMapper.toDistrict(districtDto));
-        return districtDto;
+        District district = districtRepo.save(districtMapper.toDistrict(districtDto));
+        return districtMapper.toDistrictDto(district);
     }
 
     @Override
@@ -38,9 +40,9 @@ public class DistrictServiceImpl implements DistrictService {
 
     @Override
     public DistrictDTO updateDistrict(Long id, DistrictDTO districtDto) {
-        DistrictDTO foundDistrict = districtMapper.toDistrictDto(districtRepo.findByDistrictId(id));
+        District foundDistrict = districtRepo.findByDistrictId(id);
         districtDto.setDistrictId(foundDistrict.getDistrictId());
-        districtRepo.save(districtMapper.toDistrict(districtDto));
-        return districtDto;
+        District district = districtRepo.save(districtMapper.toDistrict(districtDto));
+        return districtMapper.toDistrictDto(district);
     }
 }

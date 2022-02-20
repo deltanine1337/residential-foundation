@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/house")
@@ -17,8 +19,8 @@ public class HouseController {
 
     @GetMapping
     @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
-    public Iterable<HouseDTO> getHouses(@RequestParam(required = false) String district,
-                                        @RequestParam(required = false) String street) {
+    public List<HouseDTO> getHouses(@RequestParam(required = false) String district,
+                                    @RequestParam(required = false) String street) {
         return houseService.findHouses(district, street);
     }
 
