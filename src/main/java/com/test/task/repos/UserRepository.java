@@ -2,7 +2,7 @@ package com.test.task.repos;
 
 import java.util.Optional;
 
-import com.test.task.model.User;
+import com.test.task.model.jpa.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

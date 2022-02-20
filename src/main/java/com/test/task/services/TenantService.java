@@ -1,6 +1,6 @@
 package com.test.task.services;
 
-import com.test.task.dto.TenantDto;
+import com.test.task.model.dto.TenantDto;
 
 public interface TenantService {
     Iterable<TenantDto> getTenants();

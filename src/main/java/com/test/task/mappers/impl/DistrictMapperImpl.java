@@ -1,8 +1,8 @@
 package com.test.task.mappers.impl;
 
-import com.test.task.dto.DistrictDto;
+import com.test.task.model.dto.DistrictDto;
 import com.test.task.mappers.DistrictMapper;
-import com.test.task.model.District;
+import com.test.task.model.jpa.District;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,8 +1,8 @@
 package com.test.task.mappers.impl;
 
-import com.test.task.dto.TenantDto;
+import com.test.task.model.dto.TenantDto;
 import com.test.task.mappers.TenantMapper;
-import com.test.task.model.Tenant;
+import com.test.task.model.jpa.Tenant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

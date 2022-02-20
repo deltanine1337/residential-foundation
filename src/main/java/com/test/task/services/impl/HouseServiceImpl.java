@@ -1,16 +1,14 @@
 package com.test.task.services.impl;
 
-import com.test.task.dto.HouseDto;
+import com.test.task.model.dto.HouseDto;
 import com.test.task.mappers.impl.HouseMapperImpl;
-import com.test.task.model.House;
-import com.test.task.model.keys.HouseId;
+import com.test.task.model.jpa.keys.HouseId;
 import com.test.task.repos.HouseRepo;
 import com.test.task.services.HouseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service

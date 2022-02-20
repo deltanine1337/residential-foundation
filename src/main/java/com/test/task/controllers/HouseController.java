@@ -1,13 +1,11 @@
 package com.test.task.controllers;
 
-import com.test.task.dto.HouseDto;
-import com.test.task.model.keys.HouseId;
+import com.test.task.model.dto.HouseDto;
+import com.test.task.model.jpa.keys.HouseId;
 import com.test.task.services.HouseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

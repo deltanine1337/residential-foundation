@@ -1,12 +1,10 @@
-package com.test.task.model;
+package com.test.task.model.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.*;
 

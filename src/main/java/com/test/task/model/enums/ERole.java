@@ -1,4 +1,4 @@
-package com.test.task.model;
+package com.test.task.model.enums;
 
 public enum ERole {
 	ROLE_USER,

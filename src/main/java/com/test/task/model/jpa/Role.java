@@ -1,5 +1,6 @@
-package com.test.task.model;
+package com.test.task.model.jpa;
 
+import com.test.task.model.enums.ERole;
 import lombok.Data;
 
 import javax.persistence.*;

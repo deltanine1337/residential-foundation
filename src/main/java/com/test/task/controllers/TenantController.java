@@ -1,6 +1,6 @@
 package com.test.task.controllers;
 
-import com.test.task.dto.TenantDto;
+import com.test.task.model.dto.TenantDto;
 import com.test.task.services.TenantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

@@ -1,12 +1,10 @@
 package com.test.task.controllers;
 
-import com.test.task.dto.DistrictDto;
+import com.test.task.model.dto.DistrictDto;
 import com.test.task.services.DistrictService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

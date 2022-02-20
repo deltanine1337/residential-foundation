@@ -1,6 +1,6 @@
 package com.test.task.repos;
 
-import com.test.task.model.Tenant;
+import com.test.task.model.jpa.Tenant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

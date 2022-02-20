@@ -14,9 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.test.task.model.ERole;
-import com.test.task.model.Role;
-import com.test.task.model.User;
+import com.test.task.model.enums.ERole;
+import com.test.task.model.jpa.Role;
+import com.test.task.model.jpa.User;
 import com.test.task.payload.response.JwtResponse;
 import com.test.task.payload.response.MessageResponse;
 import com.test.task.repos.RoleRepository;

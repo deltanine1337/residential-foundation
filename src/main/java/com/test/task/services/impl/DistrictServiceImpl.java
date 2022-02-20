@@ -1,8 +1,7 @@
 package com.test.task.services.impl;
 
-import com.test.task.dto.DistrictDto;
+import com.test.task.model.dto.DistrictDto;
 import com.test.task.mappers.impl.DistrictMapperImpl;
-import com.test.task.model.District;
 import com.test.task.repos.DistrictRepo;
 import com.test.task.services.DistrictService;
 import lombok.RequiredArgsConstructor;

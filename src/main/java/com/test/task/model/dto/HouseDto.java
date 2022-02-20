@@ -1,6 +1,6 @@
-package com.test.task.dto;
+package com.test.task.model.dto;
 
-import com.test.task.model.keys.HouseId;
+import com.test.task.model.jpa.keys.HouseId;
 import lombok.Data;
 
 @Data

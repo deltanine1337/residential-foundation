@@ -1,6 +1,6 @@
 package com.test.task.services.impl;
 
-import com.test.task.dto.TenantDto;
+import com.test.task.model.dto.TenantDto;
 import com.test.task.mappers.impl.TenantMapperImpl;
 import com.test.task.repos.TenantRepo;
 import com.test.task.services.TenantService;

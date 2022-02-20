@@ -1,8 +1,8 @@
 package com.test.task.mappers.impl;
 
-import com.test.task.dto.HouseDto;
+import com.test.task.model.dto.HouseDto;
 import com.test.task.mappers.HouseMapper;
-import com.test.task.model.House;
+import com.test.task.model.jpa.House;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

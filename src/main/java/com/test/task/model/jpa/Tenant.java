@@ -1,4 +1,4 @@
-package com.test.task.model;
+package com.test.task.model.jpa;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.test.task.services;
 
-import com.test.task.dto.HouseDto;
-import com.test.task.model.keys.HouseId;
+import com.test.task.model.dto.HouseDto;
+import com.test.task.model.jpa.keys.HouseId;
 
 public interface HouseService {
     Iterable<HouseDto> getHouses();

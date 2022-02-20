@@ -1,6 +1,6 @@
-package com.test.task.model;
+package com.test.task.model.jpa;
 
-import com.test.task.model.keys.HouseId;
+import com.test.task.model.jpa.keys.HouseId;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,6 +1,6 @@
 package com.test.task.security.services;
 
-import com.test.task.model.User;
+import com.test.task.model.jpa.User;
 import com.test.task.repos.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

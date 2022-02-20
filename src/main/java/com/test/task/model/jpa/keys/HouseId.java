@@ -1,4 +1,4 @@
-package com.test.task.model.keys;
+package com.test.task.model.jpa.keys;
 
 
 import lombok.*;

@@ -1,8 +1,6 @@
 package com.test.task.services;
 
-import com.test.task.dto.DistrictDto;
-import com.test.task.model.District;
-import org.springframework.http.ResponseEntity;
+import com.test.task.model.dto.DistrictDto;
 
 public interface DistrictService {
     Iterable<DistrictDto> getDistricts();
