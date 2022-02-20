@@ -35,8 +35,8 @@ export class HouseModalComponent implements OnInit {
 
   public addHouse(): void {
     this.selectedHouse.houseId = {
-      'street': this.streeet,
-      'houseNumber': this.houseeNumber
+      street: this.streeet,
+      houseNumber: this.houseeNumber
     };
     this.selectedHouse.districtDto = this.selectedDistrict;
     this.houseService.addHouse(this.selectedHouse).subscribe(

@@ -8,8 +8,7 @@ import {AppComponent} from "../../../app.component";
 @Component({
   selector: 'app-district-list',
   templateUrl: './district-list.component.html',
-  styleUrls: ['./district-list.component.scss'],
-  providers: [DistrictService]
+  styleUrls: ['./district-list.component.scss']
 })
 export class DistrictListComponent implements OnInit {
   @ViewChild(DistrictModalComponent)
@@ -18,7 +17,7 @@ export class DistrictListComponent implements OnInit {
   isAdmin = AppComponent.isAdmin;
   isShowModal = true;
 
-  constructor(private districtService: DistrictService, private router: Router) {
+  constructor(private districtService: DistrictService) {
   }
 
   ngOnInit(): void {

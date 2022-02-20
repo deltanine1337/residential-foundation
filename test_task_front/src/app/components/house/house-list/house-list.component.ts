@@ -12,8 +12,7 @@ import {AppComponent} from "../../../app.component";
 @Component({
   selector: 'app-house-list',
   templateUrl: './house-list.component.html',
-  styleUrls: ['./house-list.component.scss'],
-  providers: [DistrictService, HouseService]
+  styleUrls: ['./house-list.component.scss']
 })
 export class HouseListComponent implements OnInit {
   @ViewChild(HouseModalComponent)
@@ -25,7 +24,7 @@ export class HouseListComponent implements OnInit {
   isAdmin = AppComponent.isAdmin;
   isShowModal = true;
 
-  constructor(private houseService: HouseService, private districtService: DistrictService) {
+  constructor(private houseService: HouseService) {
   }
 
   ngOnInit(): void {

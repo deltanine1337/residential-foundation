@@ -11,8 +11,7 @@ import {AppComponent} from "../../../app.component";
 @Component({
   selector: 'app-tenant-list',
   templateUrl: './tenant-list.component.html',
-  styleUrls: ['./tenant-list.component.scss'],
-  providers: [HouseService, TenantService]
+  styleUrls: ['./tenant-list.component.scss']
 })
 export class TenantListComponent implements OnInit {
   @ViewChild(TenantModalComponent)
