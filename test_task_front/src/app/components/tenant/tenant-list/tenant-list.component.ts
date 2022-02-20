@@ -9,17 +9,17 @@ import {TenantModalComponent} from "../tenant-modal/tenant-modal.component";
 import {AppComponent} from "../../../app.component";
 
 @Component({
-  selector: 'app-tenant',
-  templateUrl: './tenant.component.html',
-  styleUrls: ['./tenant.component.scss'],
+  selector: 'app-tenant-list',
+  templateUrl: './tenant-list.component.html',
+  styleUrls: ['./tenant-list.component.scss'],
   providers: [HouseService, TenantService]
 })
-export class TenantComponent implements OnInit {
+export class TenantListComponent implements OnInit {
   @ViewChild(TenantModalComponent)
   tenantModalComponent: TenantModalComponent;
   tenants: Tenant[] = [];
   searchCriteria: ESearchTenantCriteria = ESearchTenantCriteria.Fio;
-  criteria: ISearch[];
+  criteria: ISearch[] = SEARCH_TENANT_CRITERIAS;
   searchText: string;
   isAdmin = AppComponent.isAdmin;
   isShowModal = true;
@@ -29,8 +29,6 @@ export class TenantComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTenants();
-    this.criteria = SEARCH_TENANT_CRITERIAS;
-    this.tenantModalComponent.isHouseChanged = false;
   }
 
   public loadTenants(){
@@ -90,6 +88,15 @@ export class TenantComponent implements OnInit {
   }
 
   public onCloseModal() {
+    this.forceUpdateShowModal();
+  }
+
+  onUpdateTenants() {
+    this.forceUpdateShowModal();
+    this.loadTenants();
+  }
+
+  private forceUpdateShowModal() {
     this.isShowModal = false;
     setTimeout(() => this.isShowModal = true, 5)
   }

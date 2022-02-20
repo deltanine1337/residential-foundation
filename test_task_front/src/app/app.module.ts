@@ -6,9 +6,9 @@ import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DistrictComponent } from './components/district/district-list/district.component';
-import { HouseComponent } from './components/house/house-list/house.component';
-import { TenantComponent } from './components/tenant/tenant-list/tenant.component';
+import { DistrictListComponent } from './components/district/district-list/district-list.component';
+import { HouseListComponent } from './components/house/house-list/house-list.component';
+import { TenantListComponent } from './components/tenant/tenant-list/tenant-list.component';
 import { HttpClientModule } from "@angular/common/http";
 import { DistrictModalComponent } from './components/district/district-modal/district-modal.component';
 import { HouseModalComponent } from './components/house/house-modal/house-modal.component';
@@ -23,9 +23,9 @@ import {TokenStorageService} from "./services/token-storage.service";
 @NgModule({
   declarations: [
     AppComponent,
-    DistrictComponent,
-    HouseComponent,
-    TenantComponent,
+    DistrictListComponent,
+    HouseListComponent,
+    TenantListComponent,
     DistrictModalComponent,
     HouseModalComponent,
     TenantModalComponent,

@@ -10,17 +10,17 @@ import {HouseModalComponent} from "../house-modal/house-modal.component";
 import {AppComponent} from "../../../app.component";
 
 @Component({
-  selector: 'app-house',
-  templateUrl: './house.component.html',
-  styleUrls: ['./house.component.scss'],
+  selector: 'app-house-list',
+  templateUrl: './house-list.component.html',
+  styleUrls: ['./house-list.component.scss'],
   providers: [DistrictService, HouseService]
 })
-export class HouseComponent implements OnInit {
+export class HouseListComponent implements OnInit {
   @ViewChild(HouseModalComponent)
   houseModalComponent: HouseModalComponent;
   houses: House[] = [];
   searchCriteria: ESearchHouseCriteria = ESearchHouseCriteria.District;
-  criteria: ISearch[];
+  criteria: ISearch[] = SEARCH_HOUSE_CRITERIAS;
   searchText: string;
   isAdmin = AppComponent.isAdmin;
   isShowModal = true;
@@ -30,8 +30,6 @@ export class HouseComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHouses();
-    this.criteria = SEARCH_HOUSE_CRITERIAS;
-    this.houseModalComponent.isDistrictChanged = false;
   }
 
   public loadHouses(): void {
@@ -98,6 +96,15 @@ export class HouseComponent implements OnInit {
   }
 
   public onCloseModal() {
+    this.forceUpdateShowModal();
+  }
+
+  onUpdateHouses() {
+    this.forceUpdateShowModal();
+    this.loadHouses();
+  }
+
+  private forceUpdateShowModal() {
     this.isShowModal = false;
     setTimeout(() => this.isShowModal = true, 5)
   }

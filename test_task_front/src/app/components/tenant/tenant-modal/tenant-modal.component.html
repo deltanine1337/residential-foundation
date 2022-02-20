@@ -48,7 +48,7 @@
 
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="isUpdate ? updateTenant() : addTenant()"
-                data-bs-dismiss="modal" (click)="onClose()"
+                data-bs-dismiss="modal"
                 [disabled]="apartmentNumber.invalid || telNum.invalid || fio.invalid || !isHouseChanged">Сохранить
         </button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onClose()">Закрыть</button>

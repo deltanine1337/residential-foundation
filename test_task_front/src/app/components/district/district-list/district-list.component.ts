@@ -6,12 +6,12 @@ import {DistrictModalComponent} from "../district-modal/district-modal.component
 import {AppComponent} from "../../../app.component";
 
 @Component({
-  selector: 'app-district',
-  templateUrl: './district.component.html',
-  styleUrls: ['./district.component.scss'],
+  selector: 'app-district-list',
+  templateUrl: './district-list.component.html',
+  styleUrls: ['./district-list.component.scss'],
   providers: [DistrictService]
 })
-export class DistrictComponent implements OnInit {
+export class DistrictListComponent implements OnInit {
   @ViewChild(DistrictModalComponent)
   districtModalComponent: DistrictModalComponent;
   districts: District[] = [];
@@ -49,7 +49,17 @@ export class DistrictComponent implements OnInit {
     );
   }
 
+
   public onCloseModal() {
+    this.forceUpdateShowModal();
+  }
+
+  onUpdateDistricts() {
+    this.forceUpdateShowModal();
+    this.loadDistricts();
+  }
+
+  private forceUpdateShowModal() {
     this.isShowModal = false;
     setTimeout(() => this.isShowModal = true, 5)
   }
