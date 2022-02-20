@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {HouseService} from "../../services/house.service";
-import {House} from "../../model/house";
-import {DistrictService} from "../../services/district.service";
-import {District} from "../../model/district";
-import {SEARCH_HOUSE_CRITERIAS} from "../../consts/search.const";
-import {ISearch} from "../../model/search";
-import {ESearchHouseCriteria} from "../../model/enums/search.enum";
+import {HouseService} from "../../../services/house.service";
+import {House} from "../../../model/house";
+import {DistrictService} from "../../../services/district.service";
+import {District} from "../../../model/district";
+import {SEARCH_HOUSE_CRITERIAS} from "../../../consts/search.const";
+import {ISearch} from "../../../model/search";
+import {ESearchHouseCriteria} from "../../../model/enums/search.enum";
 import {HouseModalComponent} from "../house-modal/house-modal.component";
-import {AppComponent} from "../../app.component";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-house',
@@ -19,7 +19,7 @@ export class HouseComponent implements OnInit {
   @ViewChild(HouseModalComponent)
   houseModalComponent: HouseModalComponent;
   houses: House[] = [];
-  searchCriteria: ESearchHouseCriteria;
+  searchCriteria: ESearchHouseCriteria = ESearchHouseCriteria.District;
   criteria: ISearch[];
   searchText: string;
   isAdmin = AppComponent.isAdmin;

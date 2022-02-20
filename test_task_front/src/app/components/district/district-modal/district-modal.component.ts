@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {District} from "../../model/district";
-import {DistrictService} from "../../services/district.service";
+import {District} from "../../../model/district";
+import {DistrictService} from "../../../services/district.service";
 import {Router} from "@angular/router";
 
 @Component({

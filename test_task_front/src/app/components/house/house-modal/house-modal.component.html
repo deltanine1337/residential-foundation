@@ -54,7 +54,7 @@
           </div>
           <div class="form-group">
             <label>Район:</label>
-            <ng-select [(ngModel)]="selectedDistrict" name="selectedDistr" [searchable]="false"
+            <ng-select [clearable]="false" [(ngModel)]="selectedDistrict" name="selectedDistr" [searchable]="false"
                        placeholder="Выберите район" bindLabel="districtName"
                        [items]="districts" (change)="onChangeSelectDistrict($event)">
             </ng-select>

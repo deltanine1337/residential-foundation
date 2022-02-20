@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {HouseService} from "../../services/house.service";
-import {TenantService} from "../../services/tenant.service";
-import {House} from "../../model/house";
-import {Tenant} from "../../model/tenant";
-import {District} from "../../model/district";
+import {HouseService} from "../../../services/house.service";
+import {TenantService} from "../../../services/tenant.service";
+import {House} from "../../../model/house";
+import {Tenant} from "../../../model/tenant";
+import {District} from "../../../model/district";
 
 @Component({
   selector: 'app-tenant-modal',

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {DistrictComponent} from "./components/district/district.component";
-import {HouseComponent} from "./components/house/house.component";
-import {TenantComponent} from "./components/tenant/tenant.component";
-import {LoginComponent} from "./components/login/login.component";
-import {RegisterComponent} from "./components/register/register.component";
+import {DistrictComponent} from "./components/district/district-list/district.component";
+import {HouseComponent} from "./components/house/house-list/house.component";
+import {TenantComponent} from "./components/tenant/tenant-list/tenant.component";
+import {LoginComponent} from "./components/auth/login/login.component";
+import {RegisterComponent} from "./components/auth/register/register.component";
 
 const routes: Routes = [
   { path: 'district', component: DistrictComponent },

@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {HouseService} from "../../services/house.service";
-import {TenantService} from "../../services/tenant.service";
-import {Tenant} from "../../model/tenant";
-import {ISearch} from "../../model/search";
-import {SEARCH_TENANT_CRITERIAS} from "../../consts/search.const";
-import {ESearchTenantCriteria} from "../../model/enums/search.enum";
+import {HouseService} from "../../../services/house.service";
+import {TenantService} from "../../../services/tenant.service";
+import {Tenant} from "../../../model/tenant";
+import {ISearch} from "../../../model/search";
+import {SEARCH_TENANT_CRITERIAS} from "../../../consts/search.const";
+import {ESearchTenantCriteria} from "../../../model/enums/search.enum";
 import {TenantModalComponent} from "../tenant-modal/tenant-modal.component";
-import {AppComponent} from "../../app.component";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-tenant',
@@ -18,7 +18,7 @@ export class TenantComponent implements OnInit {
   @ViewChild(TenantModalComponent)
   tenantModalComponent: TenantModalComponent;
   tenants: Tenant[] = [];
-  searchCriteria: ESearchTenantCriteria;
+  searchCriteria: ESearchTenantCriteria = ESearchTenantCriteria.Fio;
   criteria: ISearch[];
   searchText: string;
   isAdmin = AppComponent.isAdmin;

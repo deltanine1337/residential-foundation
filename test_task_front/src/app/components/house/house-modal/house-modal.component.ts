@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {HouseService} from "../../services/house.service";
-import {DistrictService} from "../../services/district.service";
-import {House} from "../../model/house";
-import {District} from "../../model/district";
+import {HouseService} from "../../../services/house.service";
+import {DistrictService} from "../../../services/district.service";
+import {House} from "../../../model/house";
+import {District} from "../../../model/district";
 
 @Component({
   selector: 'app-house-modal',

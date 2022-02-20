@@ -6,7 +6,7 @@
       <tr>
         <td class="search-header">Поиск</td>
         <td class="search-criteria">
-          <ng-select [searchable]="false" bindValue="value" bindLabel="name"
+          <ng-select [searchable]="false" bindValue="value" bindLabel="name" [clearable]="false"
                      [items]="criteria" [hideSelected]="true" [(ngModel)]="searchCriteria"
                      placeholder="Выберите критерий"
                      (change)="onChangeSelectCriteria($event)" required>

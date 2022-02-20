@@ -1,9 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DistrictService} from "../../services/district.service";
-import {District} from "../../model/district";
+import {DistrictService} from "../../../services/district.service";
+import {District} from "../../../model/district";
 import {Router} from "@angular/router";
 import {DistrictModalComponent} from "../district-modal/district-modal.component";
-import {AppComponent} from "../../app.component";
+import {AppComponent} from "../../../app.component";
 
 @Component({
   selector: 'app-district',
